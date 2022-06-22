@@ -129,12 +129,12 @@ class gt_widget extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'title_color',
+			'gt_text_color',
 			[
-				'label' => esc_html__( 'Title Color', 'plugin-name' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'label' => esc_html__( 'Text Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .title' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .gt-wrap .switcher a' => 'color: {{VALUE}}',
 				],
 			]
 		);
