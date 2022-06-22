@@ -95,21 +95,11 @@ class gt_widget extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Settings', 'gtew' ),
+				'label' => esc_html__( 'Dropdown Settings', 'gtew' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
-		/* $this->add_control(
-			'gt_icon',
-			[
-				'label' => esc_html__( 'Icon', 'gtew' ),
-				'type' => Controls_Manager::ICONS,
-				'default' => [
-					'value' => 'fas fa-globe',
-					'library' => 'solid',
-				],
-			]
-		); */
+
 		$this->add_control(
 			'gt_hide_flag',
 			[
@@ -162,10 +152,11 @@ class gt_widget extends Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Style', 'gtew' ),
+				'label' => esc_html__( 'General', 'gtew' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
+		
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -193,6 +184,16 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'dropdown_section',
+			[
+				'label' => esc_html__( 'Dropdown', 'gtew' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+	
 		$this->add_control(
 			'gt_dropdown_bg',
 			[
@@ -279,6 +280,54 @@ class gt_widget extends Widget_Base {
 		
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'inline_section',
+			[
+				'label' => esc_html__( 'Inline Flags', 'gtew' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_responsive_control(
+			'gt_inline_flag_size',
+			[
+				'label' => esc_html__( 'Inline Flag Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap a.glink img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_inline_flag_margin',
+			[
+				'label' => esc_html__( 'Margin', 'gtew' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap a.glink' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+	
+		$this->end_controls_section();
+
 	}
 	
 	/**
@@ -294,7 +343,7 @@ class gt_widget extends Widget_Base {
 		//print_r($settings);
 		echo '<script>
 		jQuery(function() {
-			var get_lang = localStorage.getItem("lang");
+			var get_lang = "English";
 			if(get_lang=="English"){
 				jQuery(".switcher").attr("data-lang", get_lang);
 			}
