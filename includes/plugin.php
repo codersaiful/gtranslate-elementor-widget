@@ -240,8 +240,7 @@ final class Plugin {
 	}
 
 	public function frontend_scripts() {
-		
-		wp_register_script( 'frontend-script', plugins_url( 'assets/js/frontend-script.js', __FILE__ ), [ 'external-library' ] );
+		wp_register_script( 'frontend-script', plugins_url( 'assets/js/frontend-script.js', __FILE__ ) );
 		wp_enqueue_script( 'frontend-script' );
 	}
 

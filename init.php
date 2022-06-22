@@ -2,10 +2,10 @@
 /**
  * Plugin Name: GTranslate Elementor Widget
  * Description: GTranslate Elementor Widget Plugin.
- * Plugin URI: https://wordpress.org/plugins/
- * Version: 2.1
- * Author: B.M. Rafiul Alam
- * Author URI: https://themesbyte.com
+ * Plugin URI: https://profiles.wordpress.org/codersaiful/#content-plugins
+ * Version: 1.0
+ * Author: Saiful Islam
+ * Author URI: https://codeastrology.com
  * Text Domain: gtew
  */
  
