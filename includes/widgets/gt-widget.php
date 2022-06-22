@@ -125,7 +125,7 @@ class gt_widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'gt_typography',
-				'selector' => '{{WRAPPER}} .gt-wrap .switcher a',
+				'selector' => '{{WRAPPER}} .gt-wrap .switcher a, .gt-wrap a.glink',
 			]
 		);
 		$this->add_control(
@@ -134,7 +134,7 @@ class gt_widget extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap .switcher a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .gt-wrap .switcher a, .gt-wrap a.glink' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -144,7 +144,7 @@ class gt_widget extends Widget_Base {
 				'label' => esc_html__( 'Text Hover Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap .switcher a:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .gt-wrap .switcher a:hover, .gt-wrap a.glink:hover' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -155,11 +155,21 @@ class gt_widget extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'separator'=>'before',
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap .switcher .option' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .gt-wrap .switcher .option a' => 'background-color: {{VALUE}}',
 				],
 			]
 		);
 		$this->add_control(
+			'gt_dropdown_hover_bg',
+			[
+				'label' => esc_html__( 'Dropdown Hover Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option a:hover' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_responsive_control(
 			'gt_flag_size',
 			[
 				'label' => esc_html__( 'Flag Size', 'gtew' ),
@@ -187,7 +197,7 @@ class gt_widget extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'gt_scrollbar_bg',
 			[
 				'label' => esc_html__( 'Scrollbar Background', 'gtew' ),
@@ -198,7 +208,7 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
-		$this->add_control(
+		$this->add_responsive_control(
 			'gt_scrollbar_thikness',
 			[
 				'label' => esc_html__( 'Scrollbar Thikness', 'gtew' ),
@@ -233,13 +243,25 @@ class gt_widget extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-
 		$settings = $this->get_settings_for_display();
-		echo '<style>';
-			echo '.switcher .selected a:after {
+		//print_r($settings);
+		echo '<script>
+		jQuery(function() {
+			var get_lang = localStorage.getItem("lang");
 			
-			}';
-		echo '</style>';
+			if(get_lang=="English"){
+				jQuery(".switcher").attr("data-lang", get_lang);
+			}
+			
+			jQuery(".switcher .nturl").on("click", function(){
+				var country = jQuery(this).attr("title");
+				localStorage.setItem("lang", country);
+				var get_lang = localStorage.getItem("lang");
+				jQuery(".switcher").attr("data-lang", get_lang);
+				
+			});
+		});
+		</script>';
 
 	?>
 		<div class="gt-wrap">
