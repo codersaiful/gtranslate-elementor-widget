@@ -64,7 +64,7 @@ class gt_widget extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-form-horizontal';
+		return 'eicon-globe';
 	}
 
 	/**
@@ -90,16 +90,59 @@ class gt_widget extends Widget_Base {
 	 * @access protected
 	 */
 	 
-	protected function _register_controls() {
+	protected function register_controls() {
 
-		$this->end_controls_tabs();
-		
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => esc_html__( 'Settings', 'gtew' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+		$this->add_control(
+			'gt_icon',
+			[
+				'label' => esc_html__( 'Icon', 'gtew' ),
+				'type' => Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fas fa-globe',
+					'library' => 'solid',
+				],
+			]
+		);
+
 		$this->end_controls_section();
+		//STYLE
 		
-		
+		$this->start_controls_section(
+			'style_section',
+			[
+				'label' => esc_html__( 'Style', 'gtew' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'gt_typography',
+				'selector' => '{{WRAPPER}} .gt-wrap .switcher a',
+			]
+		);
+		$this->add_control(
+			'title_color',
+			[
+				'label' => esc_html__( 'Title Color', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 	}
-
+	
 	/**
 	 * Render alert widget output on the frontend.
 	 *
@@ -108,11 +151,18 @@ class gt_widget extends Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function render() {?>
+	protected function render() {
+
+		$settings = $this->get_settings_for_display();
+		echo '<style>';
+			echo '.switcher .selected a:after {
+			
+			}';
+		echo '</style>';
+
+	?>
 		<div class="gt-wrap">
-			<?php 
-				 echo do_shortcode('[gtranslate]');
-			?>
+			<?php  echo do_shortcode('[gtranslate]'); ?>
 		</div>
 	<?php 
 	}
