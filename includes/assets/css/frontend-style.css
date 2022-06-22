@@ -24,7 +24,7 @@
     background-image: url(../img/globe-grid.svg);
     position: absolute;
     top: 6px;
-    left: 0;
+    left: 6px;
     width: 20px;
     height: 16px;
     background-repeat: no-repeat;
@@ -32,4 +32,14 @@
 
 .gt-wrap .selected a::after{
 	opacity: 0;
+}
+.gt-wrap.gt-flag-hide .switcher a img{
+	display: none !important;
+}
+.gt-wrap.gt-text-hide .switcher a{
+	font-size: 0px !important;
+}
+
+.gt-wrap.gt-text-hide .switcher .option{
+	width: 60px;
 }
