@@ -99,7 +99,7 @@ class gt_widget extends Widget_Base {
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
-		$this->add_control(
+		/* $this->add_control(
 			'gt_icon',
 			[
 				'label' => esc_html__( 'Icon', 'gtew' ),
@@ -107,6 +107,51 @@ class gt_widget extends Widget_Base {
 				'default' => [
 					'value' => 'fas fa-globe',
 					'library' => 'solid',
+				],
+			]
+		); */
+		$this->add_control(
+			'gt_hide_flag',
+			[
+				'label' => esc_html__( 'Flag Image', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+		$this->add_control(
+			'gt_hide_text',
+			[
+				'label' => esc_html__( 'Flag Text', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_responsive_control(
+			'gt_dropdown_width',
+			[
+				'label' => esc_html__( 'Dropdown Width', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -230,6 +275,8 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+
+		
 		$this->end_controls_section();
 
 	}
@@ -248,23 +295,28 @@ class gt_widget extends Widget_Base {
 		echo '<script>
 		jQuery(function() {
 			var get_lang = localStorage.getItem("lang");
-			
 			if(get_lang=="English"){
 				jQuery(".switcher").attr("data-lang", get_lang);
 			}
-			
 			jQuery(".switcher .nturl").on("click", function(){
 				var country = jQuery(this).attr("title");
 				localStorage.setItem("lang", country);
 				var get_lang = localStorage.getItem("lang");
 				jQuery(".switcher").attr("data-lang", get_lang);
-				
 			});
 		});
 		</script>';
+		$flag_hide_class="";
+		$text_hide_class ="";
 
-	?>
-		<div class="gt-wrap">
+		if($settings['gt_hide_flag']!='yes'){
+			$flag_hide_class= 'gt-flag-hide';
+		}
+		if($settings['gt_hide_text']!='yes'){
+			$text_hide_class= 'gt-text-hide';
+		}
+		?>
+		<div class="gt-wrap <?php echo $flag_hide_class; ?> <?php echo $text_hide_class; ?>">
 			<?php  echo do_shortcode('[gtranslate]'); ?>
 		</div>
 	<?php 
