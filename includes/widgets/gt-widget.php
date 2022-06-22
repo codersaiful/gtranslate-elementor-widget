@@ -138,7 +138,88 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'gt_text_hover_color',
+			[
+				'label' => esc_html__( 'Text Hover Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher a:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_dropdown_bg',
+			[
+				'label' => esc_html__( 'Dropdown Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_flag_size',
+			[
+				'label' => esc_html__( 'Flag Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher a img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
+		$this->add_control(
+			'gt_scrollbar_bg',
+			[
+				'label' => esc_html__( 'Scrollbar Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option::-webkit-scrollbar-thumb' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_scrollbar_thikness',
+			[
+				'label' => esc_html__( 'Scrollbar Thikness', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 20,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 5,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option::-webkit-scrollbar' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 		$this->end_controls_section();
 
 	}
