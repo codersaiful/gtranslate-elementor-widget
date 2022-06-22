@@ -13,4 +13,33 @@
 .gt-wrap .switcher .option{
 	border: none;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	position: absolute;
+}
+.gt-wrap .selected a img[alt="en"] {
+	visibility: hidden;
+  }
+
+  .gt-wrap [data-lang="English"] .selected a:before {
+    content: "";
+    background-image: url(../img/globe-grid.svg);
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 20px;
+    height: 16px;
+    background-repeat: no-repeat;
+}
+
+.gt-wrap .selected a::after{
+	opacity: 0;
+}
+.gt-wrap.gt-flag-hide .switcher a img{
+	display: none !important;
+}
+.gt-wrap.gt-text-hide .switcher a{
+	font-size: 0px !important;
+}
+
+.gt-wrap.gt-text-hide .switcher .option{
+	width: 60px;
 }

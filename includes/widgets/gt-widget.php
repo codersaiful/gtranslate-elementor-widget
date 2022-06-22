@@ -95,18 +95,53 @@ class gt_widget extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Settings', 'gtew' ),
+				'label' => esc_html__( 'Dropdown Settings', 'gtew' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
+
 		$this->add_control(
-			'gt_icon',
+			'gt_hide_flag',
 			[
-				'label' => esc_html__( 'Icon', 'gtew' ),
-				'type' => Controls_Manager::ICONS,
+				'label' => esc_html__( 'Flag Image', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+		$this->add_control(
+			'gt_hide_text',
+			[
+				'label' => esc_html__( 'Flag Text', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_responsive_control(
+			'gt_dropdown_width',
+			[
+				'label' => esc_html__( 'Dropdown Width', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
 				'default' => [
-					'value' => 'fas fa-globe',
-					'library' => 'solid',
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -117,15 +152,16 @@ class gt_widget extends Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Style', 'gtew' ),
+				'label' => esc_html__( 'General', 'gtew' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
+		
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'gt_typography',
-				'selector' => '{{WRAPPER}} .gt-wrap .switcher a',
+				'selector' => '{{WRAPPER}} .gt-wrap .switcher a, .gt-wrap a.glink',
 			]
 		);
 		$this->add_control(
@@ -134,11 +170,162 @@ class gt_widget extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap .switcher a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .gt-wrap .switcher a, .gt-wrap a.glink' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_text_hover_color',
+			[
+				'label' => esc_html__( 'Text Hover Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher a:hover, .gt-wrap a.glink:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'dropdown_section',
+			[
+				'label' => esc_html__( 'Dropdown', 'gtew' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+	
+		$this->add_control(
+			'gt_dropdown_bg',
+			[
+				'label' => esc_html__( 'Dropdown Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option a' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_dropdown_hover_bg',
+			[
+				'label' => esc_html__( 'Dropdown Hover Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option a:hover' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'gt_flag_size',
+			[
+				'label' => esc_html__( 'Flag Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher a img' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
+		$this->add_responsive_control(
+			'gt_scrollbar_bg',
+			[
+				'label' => esc_html__( 'Scrollbar Background', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option::-webkit-scrollbar-thumb' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'gt_scrollbar_thikness',
+			[
+				'label' => esc_html__( 'Scrollbar Thikness', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 20,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 5,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher .option::-webkit-scrollbar' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'inline_section',
+			[
+				'label' => esc_html__( 'Inline Flags', 'gtew' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_responsive_control(
+			'gt_inline_flag_size',
+			[
+				'label' => esc_html__( 'Inline Flag Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap a.glink img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'gt_inline_flag_margin',
+			[
+				'label' => esc_html__( 'Margin', 'gtew' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap a.glink' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+	
 		$this->end_controls_section();
 
 	}
@@ -152,16 +339,33 @@ class gt_widget extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-
 		$settings = $this->get_settings_for_display();
-		echo '<style>';
-			echo '.switcher .selected a:after {
-			
-			}';
-		echo '</style>';
+		//print_r($settings);
+		echo '<script>
+		jQuery(function() {
+			var get_lang = "English";
+			if(get_lang=="English"){
+				jQuery(".switcher").attr("data-lang", get_lang);
+			}
+			jQuery(".switcher .nturl").on("click", function(){
+				var country = jQuery(this).attr("title");
+				localStorage.setItem("lang", country);
+				var get_lang = localStorage.getItem("lang");
+				jQuery(".switcher").attr("data-lang", get_lang);
+			});
+		});
+		</script>';
+		$flag_hide_class="";
+		$text_hide_class ="";
 
-	?>
-		<div class="gt-wrap">
+		if($settings['gt_hide_flag']!='yes'){
+			$flag_hide_class= 'gt-flag-hide';
+		}
+		if($settings['gt_hide_text']!='yes'){
+			$text_hide_class= 'gt-text-hide';
+		}
+		?>
+		<div class="gt-wrap <?php echo $flag_hide_class; ?> <?php echo $text_hide_class; ?>">
 			<?php  echo do_shortcode('[gtranslate]'); ?>
 		</div>
 	<?php 
