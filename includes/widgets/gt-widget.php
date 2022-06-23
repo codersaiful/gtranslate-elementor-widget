@@ -343,9 +343,11 @@ class gt_widget extends Widget_Base {
 		//print_r($settings);
 		echo '<script>
 		jQuery(function() {
-			var get_lang = "English";
-			if(get_lang=="English"){
+			var get_lang = localStorage.getItem("lang");
+			if(get_lang!=""){
 				jQuery(".switcher").attr("data-lang", get_lang);
+			}else{
+				localStorage.setItem("lang", "English");
 			}
 			jQuery(".switcher .nturl").on("click", function(){
 				var country = jQuery(this).attr("title");
