@@ -218,6 +218,7 @@ final class Plugin {
 	public function register_widgets( $widgets_manager ) {
 
 		require_once( __DIR__ . '/widgets/gt-widget.php' );
+		require_once( __DIR__ . '/inc.php' );
 
 		$widgets_manager->register( new gt_widget() );
 	}

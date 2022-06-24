@@ -122,17 +122,7 @@ class gt_widget extends Widget_Base {
 				'default' => 'yes',
 			]
 		);
-		$this->add_control(
-			'gt_inliene_lang',
-			[
-				'label' => esc_html__( 'Inline Lang', 'gtew' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'gtew' ),
-				'label_off' => esc_html__( 'Hide', 'gtew' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
-			]
-		);
+		
 
 		$this->add_responsive_control(
 			'gt_dropdown_width',
@@ -157,6 +147,37 @@ class gt_widget extends Widget_Base {
 			]
 		);
 
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'inline_section',
+			[
+				'label' => esc_html__( 'Inline Settings', 'gtew' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+		$this->add_control(
+			'gt_inliene_text',
+			[
+				'label' => esc_html__( 'Inline Lang Codes', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+		$this->add_control(
+			'gt_inliene_flag',
+			[
+				'label' => esc_html__( 'Inline Flags', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
 		$this->end_controls_section();
 		//STYLE
 		
@@ -315,7 +336,7 @@ class gt_widget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'inline_section',
+			'inline_section_style',
 			[
 				'label' => esc_html__( 'Inline Flags', 'gtew' ),
 				'tab' => Controls_Manager::TAB_STYLE,
@@ -344,7 +365,7 @@ class gt_widget extends Widget_Base {
 				],
 				'separator'=>'before',
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap a.glink img' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .gt-wrap .lang-list img' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -355,7 +376,7 @@ class gt_widget extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .gt-wrap a.glink' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gt-wrap .lang-list img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -390,13 +411,6 @@ class gt_widget extends Widget_Base {
 				var get_lang = localStorage.getItem("lang");
 				jQuery(".switcher").attr("data-lang", get_lang);
 			});
-
-			/*var dataList = jQuery(".option").map(function() {
-				var clone = jQuery(this).clone();
-				return jQuery(clone).html();
-			}).get();
-			
-			jQuery(".lang-list").html(dataList.join());*/
 		});
 		</script>';
 		$flag_hide_class="";
@@ -410,16 +424,21 @@ class gt_widget extends Widget_Base {
 		}
 		?>
 		<div class="gt-wrap <?php echo $flag_hide_class; ?> <?php echo $text_hide_class; ?>">
-		<?php  if($settings['gt_inliene_lang']!='yes'){ ?>
-		<p class="lang-list"></p>
-		<div>
-			<?php  echo do_shortcode('[gtranslate]'); ?>
-		</div>
-		<?php }else{?>
-		<div>
-			<?php  echo do_shortcode('[gtranslate]'); ?>
-		</div>
-		<?php }?>
+		
+			<div style="display:none">
+				<?php  echo do_shortcode('[gtranslate]'); ?>
+			</div>
+		
+			<div class="lang-list">
+				<?php 
+				if($settings['gt_inliene_flag']=='yes'){
+					echo do_shortcode('[gt_only_flag]');
+				}
+				if($settings['gt_inliene_text']=='yes'){
+					echo do_shortcode('[gt_only_lang_codes]');
+				}
+				?>
+			</div>
 		</div>
 	<?php 
 	}
