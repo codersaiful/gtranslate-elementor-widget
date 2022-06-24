@@ -91,12 +91,35 @@ class gt_widget extends Widget_Base {
 	 */
 	 
 	protected function register_controls() {
+		$this->start_controls_section(
+			'type_section',
+			[
+				'label' => esc_html__( 'Lang Type Settings', 'gtew' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'gt_view_type',
+			[
+				'label' => esc_html__( 'Select View Type', 'gtew' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'dropdown',
+				'options' => [
+					'dropdown'  => esc_html__( 'Dropdown Type', 'gtew' ),
+					'inline'  => esc_html__( 'Inline Type', 'gtew' ),
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'content_section',
 			[
 				'label' => esc_html__( 'Dropdown Settings', 'gtew' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
+				'condition' => ['gt_view_type'=>'dropdown'],
 			]
 		);
 
@@ -148,12 +171,13 @@ class gt_widget extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
+		//Inline Settings
 		$this->start_controls_section(
 			'inline_section',
 			[
 				'label' => esc_html__( 'Inline Settings', 'gtew' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
+				'condition' => ['gt_view_type'=>'inline'],
 			]
 		);
 		$this->add_control(
@@ -424,21 +448,22 @@ class gt_widget extends Widget_Base {
 		}
 		?>
 		<div class="gt-wrap <?php echo $flag_hide_class; ?> <?php echo $text_hide_class; ?>">
-		
-			<div style="display:none">
-				<?php  echo do_shortcode('[gtranslate]'); ?>
-			</div>
-		
+			<?php
+			if($settings['gt_view_type']=='dropdown'){
+				echo do_shortcode('[gtranslate]');
+			}else{
+			?>
 			<div class="lang-list">
 				<?php 
-				if($settings['gt_inliene_flag']=='yes'){
+				if('yes'=== $settings['gt_inliene_flag']){
 					echo do_shortcode('[gt_only_flag]');
 				}
-				if($settings['gt_inliene_text']=='yes'){
+				if('yes'=== $settings['gt_inliene_text']){
 					echo do_shortcode('[gt_only_lang_codes]');
 				}
 				?>
 			</div>
+			<?php }?>
 		</div>
 	<?php 
 	}
