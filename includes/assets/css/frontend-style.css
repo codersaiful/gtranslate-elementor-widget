@@ -43,3 +43,9 @@
 .gt-wrap.gt-text-hide .switcher .option{
 	width: 60px;
 }
+.lang-list img{
+    display: none;
+}
+.lang-list a{
+    margin-right: 5px;
+}

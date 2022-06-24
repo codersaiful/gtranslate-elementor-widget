@@ -202,7 +202,7 @@ final class Plugin {
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		
 		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'frontend_styles' ] );
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'frontend_scripts' ] );
+		//add_action( 'elementor/frontend/after_register_scripts', [ $this, 'frontend_scripts' ] );
 
 	}
 
@@ -240,8 +240,8 @@ final class Plugin {
 	}
 
 	public function frontend_scripts() {
-		wp_register_script( 'frontend-script', plugins_url( 'assets/js/frontend-script.js', __FILE__ ) );
-		wp_enqueue_script( 'frontend-script' );
+		wp_register_script( 'gt-frontend-script', plugins_url( 'assets/js/frontend-script.js', __FILE__ ) );
+		wp_enqueue_script( 'gt-frontend-script' );
 	}
 
 }

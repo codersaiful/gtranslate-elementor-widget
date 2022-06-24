@@ -122,6 +122,17 @@ class gt_widget extends Widget_Base {
 				'default' => 'yes',
 			]
 		);
+		$this->add_control(
+			'gt_inliene_lang',
+			[
+				'label' => esc_html__( 'Inline Lang', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'gtew' ),
+				'label_off' => esc_html__( 'Hide', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
 
 		$this->add_responsive_control(
 			'gt_dropdown_width',
@@ -242,6 +253,29 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+		$this->add_responsive_control(
+			'gt_flag_margin',
+			[
+				'label' => esc_html__( 'Flag Space', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 50,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 5,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap .switcher a img' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 
 		$this->add_responsive_control(
 			'gt_scrollbar_bg',
@@ -276,7 +310,7 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
-
+	
 		
 		$this->end_controls_section();
 
@@ -344,10 +378,11 @@ class gt_widget extends Widget_Base {
 		echo '<script>
 		jQuery(function() {
 			var get_lang = localStorage.getItem("lang");
-			if(get_lang!=""){
-				jQuery(".switcher").attr("data-lang", get_lang);
-			}else{
+			if(!get_lang){
 				localStorage.setItem("lang", "English");
+				jQuery(".switcher").attr("data-lang", "English");
+			}else{
+				jQuery(".switcher").attr("data-lang", get_lang);
 			}
 			jQuery(".switcher .nturl").on("click", function(){
 				var country = jQuery(this).attr("title");
@@ -355,6 +390,13 @@ class gt_widget extends Widget_Base {
 				var get_lang = localStorage.getItem("lang");
 				jQuery(".switcher").attr("data-lang", get_lang);
 			});
+
+			/*var dataList = jQuery(".option").map(function() {
+				var clone = jQuery(this).clone();
+				return jQuery(clone).html();
+			}).get();
+			
+			jQuery(".lang-list").html(dataList.join());*/
 		});
 		</script>';
 		$flag_hide_class="";
@@ -368,7 +410,16 @@ class gt_widget extends Widget_Base {
 		}
 		?>
 		<div class="gt-wrap <?php echo $flag_hide_class; ?> <?php echo $text_hide_class; ?>">
+		<?php  if($settings['gt_inliene_lang']!='yes'){ ?>
+		<p class="lang-list"></p>
+		<div>
 			<?php  echo do_shortcode('[gtranslate]'); ?>
+		</div>
+		<?php }else{?>
+		<div>
+			<?php  echo do_shortcode('[gtranslate]'); ?>
+		</div>
+		<?php }?>
 		</div>
 	<?php 
 	}
