@@ -247,6 +247,7 @@ class gt_widget extends Widget_Base {
 			[
 				'label' => esc_html__( 'Dropdown', 'gtew' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => ['gt_view_type'=>'dropdown'],
 			]
 		);
 	
@@ -362,8 +363,10 @@ class gt_widget extends Widget_Base {
 		$this->start_controls_section(
 			'inline_section_style',
 			[
-				'label' => esc_html__( 'Inline Flags', 'gtew' ),
+				'label' => esc_html__( 'Inline Style', 'gtew' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => ['gt_view_type'=>'inline'],
+				
 			]
 		);
 		$this->add_responsive_control(
