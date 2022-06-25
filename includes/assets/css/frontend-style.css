@@ -43,3 +43,16 @@
 .gt-wrap.gt-text-hide .switcher .option{
 	width: 60px;
 }
+
+.lang-list{
+    text-align: center;
+    text-transform: uppercase;
+}
+.lang-list a{
+    color: cornflowerblue;
+    font-size: 16px;
+    margin: 0;
+}
+.lang-list img{
+    margin: 0;
+}
