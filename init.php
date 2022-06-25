@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function elementor_gt_addon() {
 	
-	if( ! class_exists('gtranslate') || ! did_action( 'elementor/loaded' ) ){
+	if( ! class_exists('gtranslate') ){ //|| ! did_action( 'elementor/loaded' )
 		add_action( 'admin_notices', 'elementor_gt_addon_notice_root' );
 		return;
 	}
