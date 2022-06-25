@@ -460,9 +460,11 @@ class gt_widget extends Widget_Base {
 				<?php 
 				if('yes'=== $settings['gt_inliene_flag']){
 					echo do_shortcode('[gt_only_flag]');
+					echo '<div style="display:none">do_shortcode("[gtranslate]")</div>';
 				}
 				if('yes'=== $settings['gt_inliene_text']){
 					echo do_shortcode('[gt_only_lang_codes]');
+					echo '<div style="display:none">do_shortcode("[gtranslate]")</div>';
 				}
 				?>
 			</div>
