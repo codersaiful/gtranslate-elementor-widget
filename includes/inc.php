@@ -24,4 +24,17 @@ function gt_only_flag(){
 
 }
 add_shortcode('gt_only_flag', 'gt_only_flag');
+// add_shortcode('ELEMENTO_GT_WIDGET', ['GTranslate_Elementor_Ext', 'show_shortcode']);
+class GTranslate_Elementor_Ext extends GTranslate{
+    public function __construct()
+    {
+        
+    }
+    public static function show_shortcode($atts){
+        $data = get_option('GTranslate');
 
+        $data = apply_filters('gt_elementor_wid_data', $data);
+        var_dump($atts,$data);
+        return "Saiful";
+    }
+}

@@ -471,6 +471,27 @@ class gt_widget extends Widget_Base {
 			<?php }?>
 		</div>
 	<?php 
+
+
+		// echo '<hr>';
+		// $this->customize_output();
 	}
+
+	// public function customize_output()
+	// {
+
+	// 	$data = get_option('GTranslate');
+	// 	$settings = $this->get_settings_for_display();
+
+	// 	if('yes'=== $settings['gt_inliene_flag']){
+	// 		$data['saiful'] = "Saiful";
+	// 	}
+	// 	if('yes'=== $settings['gt_inliene_text']){
+	// 		$data['saiful'] = "TESTING";
+	// 	}
+
+	// 	var_dump($data);
+	// 	echo do_shortcode('[gtranslate]');
+	// }
 
 }
