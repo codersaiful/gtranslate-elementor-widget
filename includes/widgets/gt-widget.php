@@ -231,6 +231,25 @@ class gt_widget extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'icon',
+			[
+				'label' => esc_html__( 'Icon', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'exclude'=>'icon',
+				
+			]
+		);
+		$this->add_control(
+			'gt_globe_color',
+			[
+				'label' => esc_html__( 'Globe Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap [data-lang="English"] .selected a:before' => 'background: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
 			'gt_text_hover_color',
 			[
 				'label' => esc_html__( 'Text Hover Color', 'gtew' ),
@@ -400,7 +419,7 @@ class gt_widget extends Widget_Base {
 			'gt_inline_flag_margin',
 			[
 				'label' => esc_html__( 'Margin', 'gtew' ),
-				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .gt-wrap .lang-list img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -422,7 +441,7 @@ class gt_widget extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		//print_r($settings);
+		//print_r($settings['icon']);
 		echo '<script>
 		jQuery(function() {
 			var get_lang = localStorage.getItem("lang");

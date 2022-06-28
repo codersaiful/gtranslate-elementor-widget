@@ -21,6 +21,5 @@
             </a>
         <?php 
         }
-
     }
     add_shortcode('gt_only_flag', 'gt_only_flag');
