@@ -230,7 +230,7 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
-		$this->add_control(
+	/* 	$this->add_control(
 			'icon',
 			[
 				'label' => esc_html__( 'Icon', 'plugin-name' ),
@@ -238,7 +238,7 @@ class gt_widget extends Widget_Base {
 				'exclude'=>'icon',
 				
 			]
-		);
+		); */
 		$this->add_control(
 			'gt_globe_color',
 			[
