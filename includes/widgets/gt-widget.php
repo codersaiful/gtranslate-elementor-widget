@@ -301,7 +301,7 @@ class gt_widget extends Widget_Base {
 					'px' => [
 						'min' => 10,
 						'max' => 100,
-						'step' => 5,
+						'step' => 1,
 					],
 					'%' => [
 						'min' => 0,
@@ -328,12 +328,12 @@ class gt_widget extends Widget_Base {
 					'px' => [
 						'min' => 10,
 						'max' => 100,
-						'step' => 5,
+						'step' => 1,
 					],
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => 24,
+					'size' => 26,
 				],
 				'separator'=>'before',
 				'selectors' => [
@@ -468,7 +468,9 @@ class gt_widget extends Widget_Base {
 		//print_r($settings['icon']);
 		echo '<script>
 		jQuery(function() {
+			
 			var get_lang = localStorage.getItem("lang");
+
 			if(!get_lang){
 				localStorage.setItem("lang", "English");
 				jQuery(".switcher").attr("data-lang", "English");
