@@ -319,6 +319,29 @@ class gt_widget extends Widget_Base {
 			]
 		);
 		$this->add_responsive_control(
+			'gt_globe_size',
+			[
+				'label' => esc_html__( 'Globe Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 26,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap [data-lang="English"] .selected a:before' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
 			'gt_flag_margin',
 			[
 				'label' => esc_html__( 'Flag Space', 'gtew' ),
@@ -415,6 +438,7 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+		
 		$this->add_control(
 			'gt_inline_flag_margin',
 			[
