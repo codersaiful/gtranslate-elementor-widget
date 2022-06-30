@@ -301,7 +301,7 @@ class gt_widget extends Widget_Base {
 					'px' => [
 						'min' => 10,
 						'max' => 100,
-						'step' => 5,
+						'step' => 1,
 					],
 					'%' => [
 						'min' => 0,
@@ -315,6 +315,29 @@ class gt_widget extends Widget_Base {
 				'separator'=>'before',
 				'selectors' => [
 					'{{WRAPPER}} .gt-wrap .switcher a img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'gt_globe_size',
+			[
+				'label' => esc_html__( 'Globe Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 26,
+				],
+				'separator'=>'before',
+				'selectors' => [
+					'{{WRAPPER}} .gt-wrap [data-lang="English"] .selected a:before' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -415,6 +438,7 @@ class gt_widget extends Widget_Base {
 				],
 			]
 		);
+		
 		$this->add_control(
 			'gt_inline_flag_margin',
 			[
@@ -444,7 +468,9 @@ class gt_widget extends Widget_Base {
 		//print_r($settings['icon']);
 		echo '<script>
 		jQuery(function() {
+			
 			var get_lang = localStorage.getItem("lang");
+
 			if(!get_lang){
 				localStorage.setItem("lang", "English");
 				jQuery(".switcher").attr("data-lang", "English");
