@@ -333,7 +333,7 @@ class gt_widget extends Widget_Base {
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => 26,
+					'size' => 24,
 				],
 				'separator'=>'before',
 				'selectors' => [
