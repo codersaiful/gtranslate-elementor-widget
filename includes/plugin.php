@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
+define( 'CA_ADDONS_URL', plugin_dir_url( __FILE__ ) );
+define( 'CA_ASSETS', trailingslashit( CA_ADDONS_URL . 'assets' ) );
+
 final class Plugin {
 
 	/**
@@ -202,7 +205,7 @@ final class Plugin {
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		
 		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'frontend_styles' ] );
-		//add_action( 'elementor/frontend/after_register_scripts', [ $this, 'frontend_scripts' ] );
+		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'frontend_scripts' ] );
 
 	}
 
@@ -218,9 +221,11 @@ final class Plugin {
 	public function register_widgets( $widgets_manager ) {
 
 		require_once( __DIR__ . '/widgets/gt-widget.php' );
+		require_once( __DIR__ . '/widgets/slider-widget.php' );
 		require_once( __DIR__ . '/inc.php' );
 
 		$widgets_manager->register( new gt_widget() );
+		$widgets_manager->register( new slider() );
 	}
 
 	
@@ -236,13 +241,20 @@ final class Plugin {
 	 */
 
 	public function frontend_styles() {
-		wp_register_style( 'frontend-style', plugins_url( 'assets/css/frontend-style.css', __FILE__ ) );
-		wp_enqueue_style( 'frontend-style' );
+		wp_register_style( 'ca-frontend-style', plugins_url( 'assets/css/frontend-style.css', __FILE__ ) );
+		wp_register_style( 'ca-swiper-style', plugins_url( 'assets/swiper/css/swiper.min.css', __FILE__ ) );
+		wp_enqueue_style( 'ca-frontend-style' );
+		//wp_enqueue_style( 'ca-swiper-style' );
 	}
 
 	public function frontend_scripts() {
-		wp_register_script( 'gt-frontend-script', plugins_url( 'assets/js/frontend-script.js', __FILE__ ) );
-		wp_enqueue_script( 'gt-frontend-script' );
+	
+		//Swiper
+		wp_register_script( 'ca-swiper-script', plugins_url( 'assets/swiper/js/swiper.min.js', __FILE__ ) );
+		wp_enqueue_script( 'ca-swiper-script' );
+
+		wp_register_script( 'ca-slider-frontend-script', plugins_url( 'assets/js/frontend.js', __FILE__ ) );
+		wp_enqueue_script( 'ca-slider-frontend-script' );
 	}
 
 }
