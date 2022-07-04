@@ -193,6 +193,15 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'thumbnail_section',
+			[
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => __( '<h2 style="font-size:13px;color:#495157; font-weight:700">Thumbnail</h2>', 'gtew' ),
+				'content_classes' => 'your-class',
+				'separator'=> 'before'
+			]
+		);
          $this->add_control(
 			'slidesPerView',
 			[

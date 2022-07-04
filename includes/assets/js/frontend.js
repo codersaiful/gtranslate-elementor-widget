@@ -27,6 +27,7 @@ $window.on( 'elementor/frontend/init', function() {
              * get data on editor mode
              */
             var $settings = this.getElementSettings();
+            console.log($settings);
             var slider = new Swiper('.gallery-slider', {
                //spaceBetween: $settings.spaceBetween,
                 effect: $settings.effect,
@@ -51,7 +52,7 @@ $window.on( 'elementor/frontend/init', function() {
               var thumbs = new Swiper ('.gallery-thumbs', {
                 slidesPerView: $settings.slidesPerView,
                 spaceBetween: 10,
-                centeredSlides: $settings.slidesPerView=='yes' ? true : false,
+                centeredSlides: $settings.centeredSlides=='yes' ? true : false,
                 loop: true,
                 slideToClickedSlide: true,
             });
