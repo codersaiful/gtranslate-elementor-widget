@@ -45,8 +45,8 @@ $window.on( 'elementor/frontend/init', function() {
                 },
 
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.slidePrev-btn',
+                    prevEl: '.slideNext-btn',
                 },
               });
               var thumbs = new Swiper ('.gallery-thumbs', {

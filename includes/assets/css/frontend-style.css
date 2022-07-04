@@ -103,3 +103,31 @@ body {
   width: auto;
   height: 100%;
 }
+
+.slide-arrow {
+  position: absolute;
+  display: block;
+  z-index: 10;
+  top: 50%;
+  line-height: 1;
+  margin-top: -2em;
+  cursor: pointer;
+}
+.slide-arrow:hover {
+  opacity: 0.6;
+}
+.slide-arrow.swiper-button-disabled {
+  display: none;
+}
+.slide-arrow__prev {
+  left: 0;
+}
+.slide-arrow__next {
+  right: 0;
+}
+.slide-arrow .material-icons {
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 0 0 5px #333;
+  line-height: 1;
+}

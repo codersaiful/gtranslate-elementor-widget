@@ -703,8 +703,8 @@ class slider extends Widget_Base {
 			<?php } ?>
            
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+		<div class="slide-arrow slide-arrow__prev slidePrev-btn"><i class="fa fa-arrow-left"></i></div>
+		<div class="slide-arrow slide-arrow__next slideNext-btn"><i class="fa fa-arrow-right"></i></div>
     </div>
 
     <div class="swiper-container gallery-thumbs">
