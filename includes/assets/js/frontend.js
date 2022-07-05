@@ -20,22 +20,21 @@ $window.on( 'elementor/frontend/init', function() {
         run: function(){
 
             var $scope = this.$element;
-           
              var $id        = $scope[0].dataset.id;
-             console.log($id );
             /**
              * get data on editor mode
              */
             var $settings = this.getElementSettings();
-            console.log($settings);
+            console.log($settings.loop=='yes' ? true : false);
             var slider = new Swiper('.gallery-slider', {
-               //spaceBetween: $settings.spaceBetween,
-               effect: $settings.effect,
-                speed: $settings.speed,
-                loop: $settings.loop=='yes' ? true : false,
-                autoHeight: $settings.autoHeight=='yes' ? true : false,
+                slidesPerView: 1,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,
-                rewind:true,
+                loop: $settings.loop=='yes' ? true : false,
+                loopedSlides: 6,
+                speed: $settings.speed,
+                autoHeight: $settings.autoHeight=='yes' ? true : false,
+                //centeredSlides: $settings.centeredSlides=='yes' ? true : false,
+                //rewind:true,
                 autoplay: {
                     delay: $settings.delay,
                 },
@@ -54,7 +53,9 @@ $window.on( 'elementor/frontend/init', function() {
                 slidesPerView: $settings.slidesPerView,
                 spaceBetween: 10,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,
-                loop: true,
+                loop: $settings.loop=='yes' ? true : false,
+                slideToClickedSlide: true,
+                direction: $settings.direction,
                 slideToClickedSlide: true,
             });
             slider.controller.control = thumbs;

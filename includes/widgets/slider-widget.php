@@ -99,16 +99,17 @@ class slider extends Widget_Base {
         //For General Section
         $this->content_general_controls();
         $this->slider_settings_controls();
-        $this->slider_general_style();
+        //$this->slider_general_style();
         //$this->slider_btn_style();
        // $this->slider_pagination_style();
        // $this->slider_navigation_style();
+	   $this->icon_style();
     }
 	protected function slider_settings_controls(){
         $this->start_controls_section(
             'slider_settings',
             [
-                'label'     => esc_html__( 'Slider Settings . ', 'gtew' ),
+                'label'     => esc_html__( 'Slider Settings', 'gtew' ),
             ]
         );
 
@@ -176,7 +177,7 @@ class slider extends Widget_Base {
 			]
 		);
 		
-		$this->add_control(
+	/* 	$this->add_control(
 			'effect',
 			[
 				'label' => __( 'Effects', 'gtew' ),
@@ -188,7 +189,7 @@ class slider extends Widget_Base {
 					//'flip' => __( 'Flip', 'gtew' ),
 				],
 			]
-		);
+		); */
 		$this->add_control(
 			'thumbnail_section',
 			[
@@ -227,6 +228,8 @@ class slider extends Widget_Base {
                 'frontend_available' => true,
 			]
 		);
+		
+	
        /*  $this->add_control(
 			'spaceBetween',
 			[
@@ -242,19 +245,33 @@ class slider extends Widget_Base {
                 ],
 			]
 		); */
-		/* $this->add_control(
+		$this->add_control(
 			'direction',
 			[
 				'label' => __( 'Direction', 'gtew' ),
 				'type' => Controls_Manager::SELECT,
-				'default' => 'vertical',
+				'default' => 'horizontal',
 				'frontend_available' => true,
 				'options' => [
-					'vertical'  => __( 'Vertical', 'gtew' ),
 					'horizontal' => __( 'Horizontal', 'gtew' ),
+					'vertical'  => __( 'Vertical', 'gtew' ),
 				],
 			]
-		); */
+		);
+		$this->add_control(
+			'thumb_direction',
+			[
+				'label' => __( 'Thumbnail Direction', 'gtew' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'right',
+				'frontend_available' => true,
+				'options' => [
+					'left' => __( 'Left', 'gtew' ),
+					'right' => __( 'Right', 'gtew' ),
+				],
+				'condition'=>['direction'=>'vertical']
+			]
+		);
        /*  $this->add_control(
 			'navigation',
 			[
@@ -344,6 +361,7 @@ class slider extends Widget_Base {
 						'long-arrow-alt-left',
 					],
 				],
+				'skin'=>'inline',
 			]
 		);
 		$this->add_control(
@@ -369,6 +387,7 @@ class slider extends Widget_Base {
 						'long-arrow-alt-right',
 					],
 				],
+				'skin'=>'inline',
 			]
 		);
 
@@ -381,7 +400,7 @@ class slider extends Widget_Base {
      * 
      * @since 1.0.0.9
      */
-    protected function slider_general_style() {
+/* 	protected function slider_general_style() {
         $this->start_controls_section(
             'general_style',
             [
@@ -389,8 +408,51 @@ class slider extends Widget_Base {
                 'tab'       => Controls_Manager::TAB_STYLE,
             ]
         );
-        
-        
+		$this->end_controls_section();
+      
+	} */
+    protected function icon_style() {
+        $this->start_controls_section(
+            'icon_style',
+            [
+                'label'     => esc_html__( 'Icon Style', 'gtew' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_responsive_control(
+			'icon_size',
+			[
+				'label' => esc_html__( 'Icon Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 26,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .slide-arrow svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+        $this->add_control(
+			'icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-arrow svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .slide-arrow i' => 'color: {{VALUE}}',
+				],
+			]
+		);
         $this->end_controls_section();
     }
     /**
@@ -737,40 +799,67 @@ class slider extends Widget_Base {
 	 */
 	protected function render() {
         $settings = $this->get_settings_for_display();
+		print_r($settings['thumb_direction']);
 		$id= $this->get_id();
         ?>
 		
-   	 <div class="gallery">                
-    <div class="swiper-container gallery-slider">
-        <div class="swiper-wrapper">
+	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
+	    <?php
+		if($settings['thumb_direction']=='left'){
+		?>
+		<div class="swiper-container gallery-thumbs">
+			<div class="swiper-wrapper">
 			<?php
-			foreach ( $settings['gallery'] as $image ) {
-			?>
-            <div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-			
-			<?php } ?>
-           
-        </div>
-		<div class="slide-arrow slide-arrow__prev slidePrev-btn">
-			<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+				foreach ( $settings['gallery'] as $image ) {?>
+				<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+				<?php } ?>
+			</div>
 		</div>
-		<div class="slide-arrow slide-arrow__next slideNext-btn">
-		<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+		<?php }?>	
+		<div class="swiper-container gallery-slider">
+			<div class="swiper-wrapper">
+				<?php
+				foreach ( $settings['gallery'] as $image ) {?>
+				<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+				<?php } ?>
+			</div>
+			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
+				<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+			</div>
+			<div class="slide-arrow slide-arrow__next slideNext-btn">
+				<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+			</div>
 		</div>
-    </div>
-
-    <div class="swiper-container gallery-thumbs">
-        <div class="swiper-wrapper">
+		
 		<?php
-			foreach ( $settings['gallery'] as $image ) {
-			?>
-            <div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-			
-			<?php } ?>
-        </div>
-    </div>
-</div>
-        <?php
+		if($settings['thumb_direction']=='right'){
+		?>
+			<div class="swiper-container gallery-thumbs">
+				<div class="swiper-wrapper">
+				<?php
+					foreach ( $settings['gallery'] as $image ) {?>
+					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+					<?php } ?>
+				</div>
+			</div>
+		<?php }?>
+		<?php
+		if($settings['direction']=='horizontal'){
+		?>
+			<div class="swiper-container gallery-thumbs">
+				<div class="swiper-wrapper">
+				<?php
+					foreach ( $settings['gallery'] as $image ) {?>
+					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+					<?php } ?>
+				</div>
+			</div>
+		<?php }?>
+
+
+	</div>
+	
+    <?php
         
     }
 

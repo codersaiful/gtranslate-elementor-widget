@@ -93,7 +93,7 @@ body .lang-list a{
   height: 100px;
   text-align: center;
   overflow: hidden;
-  opacity: 0.1;
+  opacity: 0.4;
 }
 .gallery-thumbs .swiper-slide-active {
   opacity: 1;
@@ -129,4 +129,30 @@ body .lang-list a{
   color: #fff;
   text-shadow: 0 0 5px #333;
   line-height: 1;
+}
+.slide-arrow svg {
+  width: 2em;
+  height: 2em;
+  position: relative;
+  display: block;
+}
+
+.gallery.gallery-vertical{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  flex-grow: 1;
+  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.gallery-vertical .gallery-thumbs {
+    float: left;
+    width: 30%;
+    height: 400px;
+    margin-left: 10px;
+    flex-grow: 1;
+    justify-content: space-between;
 }
