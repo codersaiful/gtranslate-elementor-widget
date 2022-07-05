@@ -30,10 +30,11 @@ $window.on( 'elementor/frontend/init', function() {
             console.log($settings);
             var slider = new Swiper('.gallery-slider', {
                //spaceBetween: $settings.spaceBetween,
-                effect: $settings.effect,
+               effect: $settings.effect,
                 speed: $settings.speed,
                 loop: $settings.loop=='yes' ? true : false,
                 autoHeight: $settings.autoHeight=='yes' ? true : false,
+                centeredSlides: $settings.centeredSlides=='yes' ? true : false,
                 rewind:true,
                 autoplay: {
                     delay: $settings.delay,
@@ -68,8 +69,7 @@ $window.on( 'elementor/frontend/init', function() {
      * JS part had developed by(Me) Saiful Islam
      * 
      * @author Saiful Islam <codersaiful@gmail.com>
-     * @author B M Rafiul Alam <bmrafiul.alam@gmail.com>
-     * @since 1.1.0.8
+     * @since 1.0.3
      */
 
     // Moving_Letters Hooked Here

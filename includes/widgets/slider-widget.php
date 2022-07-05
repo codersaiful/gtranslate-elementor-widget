@@ -28,10 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class slider extends Widget_Base {
 
-
-	
-
-
 	/**
 	 * Get widget name.
 	 *
@@ -189,14 +185,14 @@ class slider extends Widget_Base {
 				'frontend_available' => true,
 				'options' => [
 					'fade'  => __( 'Fade', 'gtew' ),
-					'flip' => __( 'Flip', 'gtew' ),
+					//'flip' => __( 'Flip', 'gtew' ),
 				],
 			]
 		);
 		$this->add_control(
 			'thumbnail_section',
 			[
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'type' => Controls_Manager::RAW_HTML,
 				'raw' => __( '<h2 style="font-size:13px;color:#495157; font-weight:700">Thumbnail</h2>', 'gtew' ),
 				'content_classes' => 'your-class',
 				'separator'=> 'before'
@@ -319,8 +315,60 @@ class slider extends Widget_Base {
 			'gallery',
 			[
 				'label' => esc_html__( 'Add Images', 'gtew' ),
-				'type' => \Elementor\Controls_Manager::GALLERY,
+				'type' => Controls_Manager::GALLERY,
 				'default' => [],
+			]
+		);
+
+	
+		$this->add_control(
+			'prev_icon',
+			[
+				'label' => esc_html__( 'Prev Icon', 'gtew' ),
+				'type' => Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fas fa-arrow-alt-circle-left',
+					'library' => 'fa-solid',
+				],
+				'recommended' => [
+					'fa-solid' => [
+						'circle-left',
+						'arrow-left',
+						'arrow-alt-circle-left',
+						'long-arrow-alt-left',
+					],
+					'fa-regular' => [
+						'circle-left',
+						'arrow-left',
+						'arrow-alt-circle-left',
+						'long-arrow-alt-left',
+					],
+				],
+			]
+		);
+		$this->add_control(
+			'next_icon',
+			[
+				'label' => esc_html__( 'Next Icon', 'gtew' ),
+				'type' => Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fas fa-arrow-alt-circle-right',
+					'library' => 'fa-solid',
+				],
+				'recommended' => [
+					'fa-solid' => [
+						'circle-right',
+						'arrow-right',
+						'arrow-alt-circle-right',
+						'long-arrow-alt-right',
+					],
+					'fa-regular' => [
+						'circle-right',
+						'arrow-right',
+						'arrow-alt-circle-right',
+						'long-arrow-alt-right',
+					],
+				],
 			]
 		);
 
@@ -703,8 +751,12 @@ class slider extends Widget_Base {
 			<?php } ?>
            
         </div>
-		<div class="slide-arrow slide-arrow__prev slidePrev-btn"><i class="fa fa-arrow-left"></i></div>
-		<div class="slide-arrow slide-arrow__next slideNext-btn"><i class="fa fa-arrow-right"></i></div>
+		<div class="slide-arrow slide-arrow__prev slidePrev-btn">
+			<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+		</div>
+		<div class="slide-arrow slide-arrow__next slideNext-btn">
+		<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+		</div>
     </div>
 
     <div class="swiper-container gallery-thumbs">
