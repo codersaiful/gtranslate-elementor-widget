@@ -25,8 +25,8 @@ $window.on( 'elementor/frontend/init', function() {
              * get data on editor mode
              */
             var $settings = this.getElementSettings();
-            console.log($settings.loop=='yes' ? true : false);
-            var slider = new Swiper('.gallery-slider', {
+            console.log($id);
+            var slider = new Swiper('.slider-'+ $id, {
                 slidesPerView: 1,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,
                 loop: $settings.loop=='yes' ? true : false,
@@ -49,7 +49,7 @@ $window.on( 'elementor/frontend/init', function() {
                     prevEl: '.slideNext-btn',
                 },
               });
-              var thumbs = new Swiper ('.gallery-thumbs', {
+              var thumbs = new Swiper ('.thumb-'+$id, {
                 slidesPerView: $settings.slidesPerView,
                 spaceBetween: 10,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,

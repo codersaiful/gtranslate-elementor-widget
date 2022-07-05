@@ -807,16 +807,16 @@ class slider extends Widget_Base {
 	    <?php
 		if($settings['thumb_direction']=='left'){
 		?>
-		<div class="swiper-container gallery-thumbs">
+		<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 			<div class="swiper-wrapper">
-			<?php
+				<?php
 				foreach ( $settings['gallery'] as $image ) {?>
 				<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
 				<?php } ?>
 			</div>
 		</div>
 		<?php }?>	
-		<div class="swiper-container gallery-slider">
+		<div class="swiper-container gallery-slider slider-<?php echo $id;?>">
 			<div class="swiper-wrapper">
 				<?php
 				foreach ( $settings['gallery'] as $image ) {?>
@@ -834,7 +834,7 @@ class slider extends Widget_Base {
 		<?php
 		if($settings['thumb_direction']=='right'){
 		?>
-			<div class="swiper-container gallery-thumbs">
+			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
 					foreach ( $settings['gallery'] as $image ) {?>
@@ -846,7 +846,7 @@ class slider extends Widget_Base {
 		<?php
 		if($settings['direction']=='horizontal'){
 		?>
-			<div class="swiper-container gallery-thumbs">
+			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
 					foreach ( $settings['gallery'] as $image ) {?>
@@ -855,8 +855,6 @@ class slider extends Widget_Base {
 				</div>
 			</div>
 		<?php }?>
-
-
 	</div>
 	
     <?php
