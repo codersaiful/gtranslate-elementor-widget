@@ -157,7 +157,7 @@ final class Plugin {
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'gtew' ),
-			'<strong>' . esc_html__( 'GTranslate Elementor Widget', 'gtew' ) . '</strong>',
+			'<strong>' . esc_html__( 'GTranslat Elementor Widget', 'gtew' ) . '</strong>',
 			'<strong>' . esc_html__( 'Elementor', 'gtew' ) . '</strong>',
 			 self::MINIMUM_ELEMENTOR_VERSION
 		);
@@ -220,11 +220,11 @@ final class Plugin {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		require_once( __DIR__ . '/widgets/gt-widget.php' );
+		//require_once( __DIR__ . '/widgets/gt-widget.php' );
 		require_once( __DIR__ . '/widgets/slider-widget.php' );
-		require_once( __DIR__ . '/inc.php' );
+		//require_once( __DIR__ . '/inc.php' );
 
-		$widgets_manager->register( new gt_widget() );
+		//$widgets_manager->register( new gt_widget() );
 		$widgets_manager->register( new slider() );
 	}
 

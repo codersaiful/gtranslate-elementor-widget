@@ -442,30 +442,8 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-        $this->add_control(
-			'icon_color',
-			[
-				'label' => esc_html__( 'Icon Color', 'gtew' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .slide-arrow svg' => 'fill: {{VALUE}}',
-					'{{WRAPPER}} .slide-arrow i' => 'color: {{VALUE}}',
-				],
-			]
-		);
-        $this->end_controls_section();
-    }
-    /**
-	 * Button Style.
-	 */
-	protected function slider_btn_style(){
-		$this->start_controls_section(
-            'slide_btn_style',
-            [
-                'label'     => esc_html__( 'Button', 'gtew' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-            ]
-        );
+     
+		
 		$this->start_controls_tabs(
 			'slide_btn_normal_tabs'
 		);
@@ -479,44 +457,38 @@ class slider extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'_ua_slide_btn_bg', [
+			'slider_btn_bg', [
 				'label' => __( 'Button Background', 'gtew' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-						'{{WRAPPER}} .ua-hero .ua-slider-container .ua-slider-buttton' => 'background: {{VALUE}};',
+						'{{WRAPPER}} .slide-arrow' => 'background: {{VALUE}};',
 				]
 			]
         );
+		$this->add_control(
+			'icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-arrow svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .slide-arrow i' => 'color: {{VALUE}}',
+				],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'slider_btn_border',
-				'label' => esc_html__( 'Button Border', 'gtew' ),
-				'selector' => '{{WRAPPER}} .ua-hero .ua-slider-buttton',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .slide-arrow',
 			]
 		);
-		$this->add_control(
-			'_ua_slide_btn_color', [
-				'label' => __( 'Button Text Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-slider-container .ua-slider-buttton, i.uicon.uicon-cart' => 'color: {{VALUE}};',
-				]
-			]
-        );
-	
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-					'name' => 'slide_btn_typography',
-					'label' => 'Button Typography',
-					'selector' => '{{WRAPPER}} .ua-slider-buttton',
-			]
-        );
+		
 		$this->add_responsive_control(
 			'_slide_btn_radius',
 			[
-				'label'       => esc_html__( 'Button Radius', 'gtew' ),
+				'label'       => esc_html__( 'Radius', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'placeholder' => [
@@ -526,15 +498,36 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .ua-hero .ua-slider-container .ua-slider-buttton' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .ua-hero .ua-slider-container .ua-slider-buttton:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'nav_margin',
+			[
+				'label' => esc_html__( 'Margin', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px'],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 400,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => '44',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .slide-arrow__prev' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow__next' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 		$this->add_responsive_control(
 			'_slide_btn_padding',
 			[
-				'label'       => esc_html__( 'Button Padding', 'gtew' ),
+				'label'       => esc_html__( 'Padding', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'placeholder' => [
@@ -544,8 +537,16 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .ua-slider-container .ua-slider-buttton' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'nav_box_shadow',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .slide-arrow',
 			]
 		);
 		
@@ -559,49 +560,53 @@ class slider extends Widget_Base {
 				'label' => __( 'Hover', 'gtew' ),
 			]
 		);
-		$this->add_control(
-			'_ua_btn_animation',
-			[
-				'label' => esc_html__( 'Select Animation', 'gtew' ),
-				'type' => Controls_Manager::SELECT,
-				//'options' => ultraaddons_button_hover(),
-				'default' => 'hvr-fade',
-			]
-		);
+
 		$this->add_control(
 			'_ua_slide_btn_hover_bg', [
-				'label' => __( 'Button Background', 'gtew' ),
+				'label' => __( 'Background', 'gtew' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-						'{{WRAPPER}} .ua-hero .ua-slider-container .ua-slider-buttton:before, .ua-slider-container .ua-slider-buttton:hover' => 'background: {{VALUE}};',
+						'{{WRAPPER}} .slide-arrow:hover' => 'background: {{VALUE}};',
 				]
 			]
         );
+		$this->add_control(
+			'icon_color_hover',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-arrow svg:hover' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .slide-arrow i:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'slider_btn_hover_border',
 				'label' => esc_html__( 'Button Border', 'gtew' ),
-				'selector' => '{{WRAPPER}} .ua-slider-container a.ua-slider-buttton:hover',
+				'selector' => '{{WRAPPER}} .slide-arrow:hover',
 			]
 		);
-		$this->add_control(
-			'_ua_slide_btn_hover_color', [
-				'label' => __( 'Button Text Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-slider-container .ua-slider-buttton' => 'color: {{VALUE}};',
-				]
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'nav_box_shadow_hover',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .slide-arrow:hover',
 			]
-        );
-
+		);
 	
 		$this->end_controls_tabs();
 		
 		$this->end_controls_tab();
-		
-		$this->end_controls_section();
-	}
+        $this->end_controls_section();
+    }
+    /**
+	 * bullete Style.
+	 */
+	
 	protected function slider_pagination_style() {
 		$id = $this->get_id();
         $this->start_controls_section(
@@ -764,7 +769,7 @@ class slider extends Widget_Base {
 				],
 			]
         );
-		$this->add_control(
+		$this->responsive_control(
 			'icon_size',
 			[
 				'label' => esc_html__( 'Icon Size', 'gtew' ),
@@ -785,6 +790,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+
 		
 
         $this->end_controls_section();
@@ -799,7 +805,7 @@ class slider extends Widget_Base {
 	 */
 	protected function render() {
         $settings = $this->get_settings_for_display();
-		print_r($settings['thumb_direction']);
+		//print_r($settings['thumb_direction']);
 		$id= $this->get_id();
         ?>
 		

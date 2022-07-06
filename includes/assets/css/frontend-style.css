@@ -65,7 +65,6 @@ body .lang-list a{
 
 .gallery {
   width: 100%;
-  max-width: 620px;
   margin: 40px auto;
 }
 .gallery-slider {
@@ -111,6 +110,8 @@ body .lang-list a{
   line-height: 1;
   margin-top: -2em;
   cursor: pointer;
+  background: #bf3939;
+  padding: 7px;
 }
 .slide-arrow:hover {
   opacity: 0.6;
