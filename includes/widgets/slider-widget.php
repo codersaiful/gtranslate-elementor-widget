@@ -101,9 +101,8 @@ class slider extends Widget_Base {
         $this->content_general_controls();
         $this->slider_settings_controls();
         $this->slider_thumb_style();
-        //$this->slider_btn_style();
        // $this->slider_pagination_style();
-       // $this->slider_navigation_style();
+       $this->main_image_style();
 	   $this->icon_style();
     }
 	protected function slider_settings_controls(){
@@ -700,7 +699,82 @@ class slider extends Widget_Base {
 
 		$this->end_controls_section();
 	}
+		/** Main Image Style **/
 
+		protected function main_image_style() {
+			$this->start_controls_section(
+				'main_image_style',
+				[
+					'label'     => esc_html__( 'Main Image', 'gtew' ),
+					'tab'       => Controls_Manager::TAB_STYLE,
+				]
+			);
+			$this->add_responsive_control(
+				'main_image_width',
+				[
+					'label' => esc_html__( 'Image Width', 'gtew' ),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => [ 'px', '%' ],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 2000,
+							'step' => 5,
+						],
+						'%' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'unit' => '%',
+						'size' => 100,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .swiper-slide.main-slide img' => 'width:{{SIZE}}{{UNIT}};',
+					],
+				]
+			);
+	
+			$this->add_responsive_control(
+				'main_image_spacing',
+				[
+					'label'       => esc_html__( 'Space Between', 'gtew' ),
+					'type'        => Controls_Manager::DIMENSIONS,
+					'size_units'  => [ 'px', '%' ],
+					'placeholder' => [
+						'top'    => '',
+						'right'  => '',
+						'bottom' => '',
+						'left'   => '',
+					],
+					'isLinked' => '',
+					'selectors'   => [
+						'{{WRAPPER}} .swiper-container.gallery-slider ' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+				]
+			);
+
+			$this->add_group_control(
+				Group_Control_Border::get_type(),
+				[
+					'name' => 'main_image_border',
+					'label' => esc_html__( 'Border', 'gtew' ),
+					'selector' => '{{WRAPPER}} .swiper-container.gallery-slider',
+				]
+			);
+			$this->add_group_control(
+				Group_Control_Box_Shadow::get_type(),
+				[
+					'name' => 'main_image_shadow',
+					'label' => esc_html__( 'Image Shadow', 'gtew' ),
+					'selector' => '{{WRAPPER}} .swiper-container.gallery-slider',
+				]
+			);
+
+
+			$this->end_controls_section();
+		}
 	/** Icon Style **/
     protected function icon_style() {
         $this->start_controls_section(
@@ -747,8 +821,8 @@ class slider extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'slider_btn_bg', [
-				'label' => __( 'Button Background', 'gtew' ),
+			'slider_icon_bg', [
+				'label' => __( 'Background', 'gtew' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 						'{{WRAPPER}} .slide-arrow' => 'background: {{VALUE}};',
@@ -925,7 +999,9 @@ class slider extends Widget_Base {
 			<div class="swiper-wrapper">
 				<?php
 				foreach ( $settings['gallery'] as $image ) {?>
-				<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+				<div class="swiper-slide main-slide">
+					<?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?>
+				</div>
 				<?php } ?>
 			</div>
 			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
@@ -948,6 +1024,7 @@ class slider extends Widget_Base {
 				</div>
 			</div>
 		<?php }?>
+
 		<?php
 		if($settings['direction']=='horizontal'){
 		?>
