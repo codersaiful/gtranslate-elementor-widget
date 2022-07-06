@@ -11,6 +11,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Css_Filter;
 use Elementor\Plugin;
 use Elementor\Utils;
 
@@ -230,7 +231,7 @@ class slider extends Widget_Base {
 		);
 		
 	
-       /*  $this->add_control(
+       $this->add_control(
 			'spaceBetween',
 			[
 				'label' => __( 'Space Between', 'gtew' ),
@@ -244,7 +245,7 @@ class slider extends Widget_Base {
                     'slidesPerView!' => 'default',
                 ],
 			]
-		); */
+		);
 		$this->add_control(
 			'direction',
 			[
@@ -431,7 +432,7 @@ class slider extends Widget_Base {
 		$this->add_responsive_control(
 			'_thumb_normal_radius',
 			[
-				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'label'       => esc_html__( 'Border Radius', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'placeholder' => [
@@ -445,12 +446,42 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+		$this->add_responsive_control(
+			'thumb_normal_scale',
+			[
+				'label' => esc_html__( 'Scale', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+		
+				'range' => [
+					'px' => [
+						'min' => .1,
+						'max' => 10,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
+				],
+			]
+		);
+		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'thumb_normal_shadow',
 				'label' => esc_html__( 'Box Shadow', 'gtew' ),
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'thumb_normal_css_filter',
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img',
 			]
 		);
 		$this->end_controls_tab();
@@ -473,7 +504,7 @@ class slider extends Widget_Base {
 		$this->add_responsive_control(
 			'_thumb_hover_radius',
 			[
-				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'label'       => esc_html__( 'Border Radius', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'placeholder' => [
@@ -487,12 +518,41 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+		$this->add_responsive_control(
+			'thumb_hover_scale',
+			[
+				'label' => esc_html__( 'Scale', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+		
+				'range' => [
+					'px' => [
+						'min' => .1,
+						'max' => 2,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide:hover' => 'transform:scale({{SIZE}});',
+				],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'thumb_hover_shadow',
 				'label' => esc_html__( 'Box Shadow', 'gtew' ),
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide:hover',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'thumb_hover_css_filter',
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img:hover',
 			]
 		);
 
@@ -516,7 +576,7 @@ class slider extends Widget_Base {
 		$this->add_responsive_control(
 			'_thumb_active_radius',
 			[
-				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'label'       => esc_html__( 'Border Radius', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'placeholder' => [
@@ -530,6 +590,28 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+		$this->add_responsive_control(
+			'thumb_active_scale',
+			[
+				'label' => esc_html__( 'Scale', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+		
+				'range' => [
+					'px' => [
+						'min' => .1,
+						'max' => 2,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
+				],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -538,6 +620,14 @@ class slider extends Widget_Base {
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active',
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'thumb_active_css_filter',
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img',
+			]
+		);
+
 
 		$this->end_controls_tab();
 

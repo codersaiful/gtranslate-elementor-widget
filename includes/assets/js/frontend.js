@@ -51,12 +51,12 @@ $window.on( 'elementor/frontend/init', function() {
               });
               var thumbs = new Swiper ('.thumb-'+$id, {
                 slidesPerView: $settings.slidesPerView,
-                spaceBetween: 10,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,
                 loop: $settings.loop=='yes' ? true : false,
                 slideToClickedSlide: true,
                 direction: $settings.direction,
                 slideToClickedSlide: true,
+                spaceBetween:$settings.spaceBetween
             });
             slider.controller.control = thumbs;
             thumbs.controller.control = slider;

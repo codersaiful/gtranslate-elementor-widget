@@ -84,7 +84,7 @@ body .lang-list a{
 }
 .gallery-thumbs {
   width: 100%;
-  padding: 0;
+  padding: 7px;
   overflow: hidden;
 }
 .gallery-thumbs .swiper-slide {
@@ -156,4 +156,11 @@ body .lang-list a{
     margin-left: 10px;
     flex-grow: 1;
     justify-content: space-between;
+}
+.gallery-thumbs .swiper-slide {
+-webkit-transition: all .7s ease;
+-moz-transition: all .7s ease;
+-ms-transition: all .7s ease;
+transition: all .7 ease;
+overflow: hidden;
 }
