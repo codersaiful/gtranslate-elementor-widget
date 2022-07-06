@@ -484,6 +484,29 @@ class slider extends Widget_Base {
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img',
 			]
 		);
+
+		/** Thumbnail Overlay Section **/
+		$this->add_control(
+			'thumbnail_overlay',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => __( '<h2 style="font-size:13px;color:#495157; font-weight:700">Thumbnail Overlay</h2>', 'gtew' ),
+				'content_classes' => 'your-class',
+				'separator'=> 'before'
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'thumb_normal_background',
+				'label' => esc_html__( 'Background', 'gtew' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude'=> ['image'],
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide::after',
+			]
+		);
+
+
 		$this->end_controls_tab();
 
 		/*** Hover Tab ***/
@@ -555,6 +578,27 @@ class slider extends Widget_Base {
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img:hover',
 			]
 		);
+		/** Thumbnail Overlay Section **/
+		$this->add_control(
+			'thumbnail_hover_overlay',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => __( '<h2 style="font-size:13px;color:#495157; font-weight:700">Thumbnail Hover Overlay</h2>', 'gtew' ),
+				'content_classes' => 'your-class',
+				'separator'=> 'before'
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'thumb_hover_background',
+				'label' => esc_html__( 'Background', 'gtew' ),
+				'types' => [ 'classic', 'gradient' ],
+				 'exclude'=> ['image'],	
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide:hover::after',
+			]
+		);
+
 
 		$this->end_controls_tab();
 
@@ -625,6 +669,27 @@ class slider extends Widget_Base {
 			[
 				'name' => 'thumb_active_css_filter',
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img',
+			]
+		);
+
+		/** Thumbnail Overlay Section **/
+		$this->add_control(
+			'thumbnail_active_overlay',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => __( '<h2 style="font-size:13px;color:#495157; font-weight:700">Thumbnail Active Overlay</h2>', 'gtew' ),
+				'content_classes' => 'your-class',
+				'separator'=> 'before'
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'thumb_active_background',
+				'label' => esc_html__( 'Background', 'gtew' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude'=> ['image'],
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active::after',
 			]
 		);
 
