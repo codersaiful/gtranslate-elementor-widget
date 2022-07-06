@@ -154,7 +154,7 @@ body .lang-list a{
 .gallery-vertical .gallery-thumbs {
     float: left;
     width: 20%;
-    height: 400px;
+    height: 395px;
     margin-left: 10px;
     flex-grow: 1;
     justify-content: space-between;

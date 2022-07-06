@@ -245,33 +245,7 @@ class slider extends Widget_Base {
                 ],
 			]
 		);
-		$this->add_control(
-			'direction',
-			[
-				'label' => __( 'Direction', 'gtew' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'horizontal',
-				'frontend_available' => true,
-				'options' => [
-					'horizontal' => __( 'Horizontal', 'gtew' ),
-					'vertical'  => __( 'Vertical', 'gtew' ),
-				],
-			]
-		);
-		$this->add_control(
-			'thumb_direction',
-			[
-				'label' => __( 'Thumbnail Direction', 'gtew' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'right',
-				'frontend_available' => true,
-				'options' => [
-					'left' => __( 'Left', 'gtew' ),
-					'right' => __( 'Right', 'gtew' ),
-				],
-				'condition'=>['direction'=>'vertical']
-			]
-		);
+
       /* $this->add_control(
 			'navigation',
 			[
@@ -341,7 +315,7 @@ class slider extends Widget_Base {
 		$this->add_control(
 			'prev_icon',
 			[
-				'label' => esc_html__( 'Prev Icon', 'gtew' ),
+				'label' => esc_html__( 'Previous Icon', 'gtew' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-arrow-alt-circle-left',
@@ -709,6 +683,52 @@ class slider extends Widget_Base {
 					'tab'       => Controls_Manager::TAB_STYLE,
 				]
 			);
+			$this->add_control(
+				'direction',
+				[
+					'label' => __( 'Direction', 'gtew' ),
+					'type' => Controls_Manager::SELECT,
+					'default' => 'horizontal',
+					'frontend_available' => true,
+					'options' => [
+						'horizontal' => __( 'Horizontal', 'gtew' ),
+						'vertical'  => __( 'Vertical', 'gtew' ),
+					],
+				]
+			);
+			/*$this->add_control(
+				'thumb_direction_',
+				[
+					'label' => __( 'Thumbnail Direction', 'gtew' ),
+					'type' => Controls_Manager::SELECT,
+					'default' => 'right',
+					'frontend_available' => true,
+					'options' => [
+						'left' => __( 'Left', 'gtew' ),
+						'right' => __( 'Right', 'gtew' ),
+					],
+					'condition'=>['direction'=>'vertical']
+				]
+			); */
+			$this->add_control(
+				'thumb_direction',
+				[
+					'label' => esc_html__( 'Alignment', 'plugin-name' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'left' => [
+							'title' => esc_html__( 'Left', 'plugin-name' ),
+							'icon' => ' eicon-h-align-left',
+						],
+						'right' => [
+							'title' => esc_html__( 'Right', 'plugin-name' ),
+							'icon' => ' eicon-h-align-right',
+						],
+					],
+					'toggle' => true,
+					'condition'=>['direction'=>'vertical']
+				]
+			);
 			$this->add_responsive_control(
 				'main_image_width',
 				[
@@ -978,7 +998,7 @@ class slider extends Widget_Base {
 	 */
 	protected function render() {
         $settings = $this->get_settings_for_display();
-		//print_r($settings['thumb_direction']);
+		//print_r($settings['direction']);
 		$id= $this->get_id();
         ?>
 		
