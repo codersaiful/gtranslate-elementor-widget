@@ -99,7 +99,7 @@ class slider extends Widget_Base {
         //For General Section
         $this->content_general_controls();
         $this->slider_settings_controls();
-        //$this->slider_general_style();
+        $this->slider_thumb_style();
         //$this->slider_btn_style();
        // $this->slider_pagination_style();
        // $this->slider_navigation_style();
@@ -272,7 +272,7 @@ class slider extends Widget_Base {
 				'condition'=>['direction'=>'vertical']
 			]
 		);
-       /*  $this->add_control(
+      /* $this->add_control(
 			'navigation',
 			[
 				'label' => __( 'Navigation', 'gtew' ),
@@ -284,7 +284,7 @@ class slider extends Widget_Base {
                 'frontend_available' => true,
 			]
 		);
-        $this->add_control(
+       /* $this->add_control(
 			'pagination',
 			[
 				'label' => __( 'Pagination', 'gtew' ),
@@ -400,17 +400,153 @@ class slider extends Widget_Base {
      * 
      * @since 1.0.0.9
      */
-/* 	protected function slider_general_style() {
+ function slider_thumb_style() {
         $this->start_controls_section(
-            'general_style',
+            'thumb_style',
             [
                 'label'     => esc_html__( 'Thumbnail Style', 'gtew' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
             ]
         );
+
+		$this->start_controls_tabs(
+			'thumb_style_tabs'
+		);
+		/*** Normal Tab ***/
+		$this->start_controls_tab(
+			'thumb_normal_tab',
+			[
+				'label' => esc_html__( 'Normal', 'gtew' ),
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'thumb_normal_border',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img',
+			]
+		);
+		$this->add_responsive_control(
+			'_thumb_normal_radius',
+			[
+				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'thumb_normal_shadow',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide',
+			]
+		);
+		$this->end_controls_tab();
+
+		/*** Hover Tab ***/
+		$this->start_controls_tab(
+			'thumb_hover_tab',
+			[
+				'label' => esc_html__( 'Hover', 'gtew' ),
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'thumb_hover_border',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide:hover',
+			]
+		);
+		$this->add_responsive_control(
+			'_thumb_hover_radius',
+			[
+				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide img:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'thumb_hover_shadow',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/*** Active ***/
+		$this->start_controls_tab(
+			'thumb_active_tab',
+			[
+				'label' => esc_html__( 'Active', 'gtew' ),
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'thumb_active_border',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img',
+			]
+		);
+		$this->add_responsive_control(
+			'_thumb_active_radius',
+			[
+				'label'       => esc_html__( 'Radius', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'thumb_active_shadow',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->end_controls_section();
-      
-	} */
+	}
+
+	/** Icon Style **/
     protected function icon_style() {
         $this->start_controls_section(
             'icon_style',
@@ -443,7 +579,6 @@ class slider extends Widget_Base {
 			]
 		);
      
-		
 		$this->start_controls_tabs(
 			'slide_btn_normal_tabs'
 		);
@@ -551,8 +686,9 @@ class slider extends Widget_Base {
 		);
 		
 		$this->end_controls_tab();
+		
 		/**
-		 * Button Hover tab
+		 *  Hover tab
 		 */
 		$this->start_controls_tab(
 			'slide_btn_hover_tabs',
@@ -598,203 +734,11 @@ class slider extends Widget_Base {
 			]
 		);
 	
-		$this->end_controls_tabs();
-		
 		$this->end_controls_tab();
+		$this->end_controls_tabs();
         $this->end_controls_section();
     }
-    /**
-	 * bullete Style.
-	 */
-	
-	protected function slider_pagination_style() {
-		$id = $this->get_id();
-        $this->start_controls_section(
-            'pagination_style',
-            [
-                'label'     => esc_html__( 'Pagination', 'gtew' ),
-                'tab'       => Controls_Manager::TAB_STYLE,
-            ]
-        );
-		$this->add_responsive_control(
-			'slider_bullet_radius',
-			[
-				'label'       => esc_html__( 'Bullets Radius', 'gtew' ),
-				'type'        => Controls_Manager::DIMENSIONS,
-				'size_units'  => [ 'px', '%' ],
-				'placeholder' => [
-					'top'    => '',
-					'right'  => '',
-					'bottom' => '',
-					'left'   => '',
-				],
-				'selectors'   => [
-					'{{WRAPPER}} .ua-hero .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'pagination_type' => 'bullets'
-				],
-			]
-		);
-		$this->add_control(
-			'slider_bullet_height',
-			[
-				'label' => esc_html__( 'Bullets Height', 'gtew' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 1,
-						'max' => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => '12',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ua-hero .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};',
-				],
-				'condition' => [
-					'pagination_type' => 'bullets'
-				],
-			]
-		);
-		$this->add_control(
-			'slider_bullet_width',
-			[
-				'label' => esc_html__( 'Bullets Width', 'gtew' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 1,
-						'max' => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => '12',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ua-hero .swiper-pagination-bullet' => 'width: {{SIZE}}{{UNIT}};',
-				],
-				'condition' => [
-					'pagination_type' => 'bullets'
-				],
-			]
-		);
-
-		$this->add_control(
-			'slider_bullet_color', [
-				'label' => __( 'Bullet Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-hero .swiper-pagination-bullet' => 'background: {{VALUE}};',
-				],
-				'condition' => [
-					'pagination_type' => 'bullets'
-				],
-			]
-        );
-	
-		$this->add_control(
-			'slider_progress_fill_color', [
-				'label' => __( 'Progress Fill Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-hero .swiper-pagination-progressbar .swiper-pagination-progressbar-fill' => 'background: {{VALUE}};',
-				],
-				'condition' => [
-					'pagination_type' => 'progressbar'
-				],
-			
-			]
-        );
-		$this->add_control(
-			'slider_progress_color', [
-				'label' => __( 'Progress Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-hero .swiper-pagination-progressbar' => 'background: {{VALUE}};',
-				],
-				'condition' => [
-					'pagination_type' => 'progressbar'
-				],
-			]
-        );
-		$this->add_control(
-			'slider_fraction_color', [
-				'label' => __( 'Fraction Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .ua-hero .swiper-pagination-fraction' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'pagination_type' => 'fraction'
-				],
-			]
-        );
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-                'name' => 'fraction_typo',
-                'label' => 'Fraction Typography',
-                'selector' => '{{WRAPPER}} .ua-hero .swiper-pagination-fraction',
-				'condition' => [
-					'pagination_type' => 'fraction'
-				],
-			]
-			
-        );
-		
-
-        $this->end_controls_section();
-    }
-	protected function slider_navigation_style() {
-		$id = $this->get_id();
-        $this->start_controls_section(
-            'navigation_style',
-            [
-                'label'     => esc_html__( 'Navigation', 'gtew' ),
-                'tab'       => Controls_Manager::TAB_STYLE,
-            ]
-        );
-		$this->add_control(
-			'slider_navigation_color', [
-				'label' => __( 'Navigation Color', 'gtew' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-						'{{WRAPPER}} .swiper-button-next:after, .swiper-button-prev:after' => 'color: {{VALUE}};',
-				],
-			]
-        );
-		$this->responsive_control(
-			'icon_size',
-			[
-				'label' => esc_html__( 'Icon Size', 'gtew' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px'],
-				'range' => [
-					'px' => [
-						'min' => 10,
-						'max' => 200,
-						'step' => 10,
-					],
-				],
-				'default' => [
-					'size' => '44',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .swiper-button-next:after, .swiper-button-prev:after' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		
-
-        $this->end_controls_section();
-    }
+   
 	/**
 	 * Render alert widget output on the frontend.
 	 *
