@@ -116,7 +116,7 @@ body .lang-list a{
   padding: 7px;
 }
 .slide-arrow:hover {
-  opacity: 0.6;
+  /* opacity: 0.6; */
 }
 .slide-arrow.swiper-button-disabled {
   display: none;
@@ -154,10 +154,12 @@ body .lang-list a{
 .gallery-vertical .gallery-thumbs {
     float: left;
     width: 20%;
-    height: 395px;
+    height: 400px;
     margin-left: 10px;
-    flex-grow: 1;
-    justify-content: space-between;
+    flex-grow: 2;
+    justify-content: stretch;
+    align-self: start;
+    /* flex: 1; */
 }
 .gallery-thumbs .swiper-slide {
   -webkit-transition: all .7s ease;
