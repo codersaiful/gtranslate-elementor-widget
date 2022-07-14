@@ -852,7 +852,7 @@ class slider extends Widget_Base {
         $this->start_controls_section(
             'icon_style',
             [
-                'label'     => esc_html__( 'Icon Style', 'gtew' ),
+                'label'     => esc_html__( 'Arrow Icon Style', 'gtew' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1093,11 +1093,14 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Icon Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr__control--overlaid, .plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true]' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr--full-ui input[type=range]' => 'color: {{VALUE}}',
+					
 				],
 				'default'=>'#bf3939'
 			]
 		);
+
 		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
