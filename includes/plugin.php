@@ -242,17 +242,25 @@ final class Plugin {
 
 	public function frontend_styles() {
 		wp_register_style( 'ca-frontend-style', plugins_url( 'assets/css/frontend-style.css', __FILE__ ) );
-		wp_register_style( 'ca-swiper-style', plugins_url( 'assets/swiper/css/swiper.min.css', __FILE__ ) );
 		wp_enqueue_style( 'ca-frontend-style' );
-		//wp_enqueue_style( 'ca-swiper-style' );
+		wp_register_style( 'ca-swiper-style', plugins_url( 'assets/swiper/css/swiper.min.css', __FILE__ ) );
+		wp_enqueue_style( 'ca-swiper-style' );
+		
+		wp_register_style( 'ca-plyr-style', plugins_url( 'assets/css/plyr.css', __FILE__ )  );
+		wp_enqueue_style( 'ca-plyr-style' );
+		
+		
 	}
 
 	public function frontend_scripts() {
 	
-		//Swiper
+		//Slider
 		wp_register_script( 'ca-swiper-script', plugins_url( 'assets/swiper/js/swiper.min.js', __FILE__ ) );
 		wp_enqueue_script( 'ca-swiper-script' );
-
+		
+		//Video
+		wp_register_script( 'ca-plyr-js',  plugins_url( 'assets/js/plyr.js', __FILE__ ) );
+		wp_enqueue_script( 'ca-plyr-js' );
 		wp_register_script( 'ca-slider-frontend-script', plugins_url( 'assets/js/frontend.js', __FILE__ ) );
 		wp_enqueue_script( 'ca-slider-frontend-script' );
 	}

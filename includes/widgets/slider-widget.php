@@ -104,6 +104,7 @@ class slider extends Widget_Base {
        // $this->slider_pagination_style();
        $this->main_image_style();
 	   $this->icon_style();
+	   $this->play_style();
     }
 	protected function slider_settings_controls(){
         $this->start_controls_section(
@@ -302,6 +303,57 @@ class slider extends Widget_Base {
                 'tab'       => Controls_Manager::TAB_CONTENT,
             ]
         );
+		$this->add_control(
+			'video_type',
+			[
+				'label' => esc_html__( 'Source', 'gtew' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'youtube',
+				'options' => [
+					'youtube' => esc_html__( 'YouTube', 'gtew' ),
+					'vimeo' => esc_html__( 'Vimeo', 'gtew' ),
+					'hosted' => esc_html__( 'Self Hosted', 'gtew' ),
+				],
+			]
+		);
+		$this->add_control(
+			'youtube_url',
+			[
+				'label' => esc_html__( 'Youtube Link', 'gtew' ),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (YouTube)',
+				'default' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
+				'label_block' => true,
+				'condition' => [
+					'video_type' => 'youtube',
+				],
+			]
+		);
+		$this->add_control(
+			'vimeo_url',
+			[
+				'label' => esc_html__( 'Vimeo Link', 'gtew' ),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (Vimeo)',
+				'default' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
+				'label_block' => true,
+				'condition' => [
+					'video_type' => 'vimeo',
+				],
+			]
+		);
+
+		$this->add_control(
+			'video_poster',
+			[
+				'label' => esc_html__( 'Choose Poster', 'gtew' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+			]
+		);
+
 		$this->add_control(
 			'gallery',
 			[
@@ -988,6 +1040,111 @@ class slider extends Widget_Base {
 		$this->end_controls_tabs();
         $this->end_controls_section();
     }
+
+	/** Play Style **/
+
+    protected function play_style() {
+        $this->start_controls_section(
+            'play_style',
+            [
+                'label'     => esc_html__( 'Play Icon Style', 'gtew' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_responsive_control(
+			'play_size',
+			[
+				'label' => esc_html__( 'Play Icon Size', 'gtew' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 26,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control.plyr__control--overlaid svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+     
+		$this->start_controls_tabs(
+			'play_normal_tabs'
+		);
+		/**
+		 * Normal tab
+		 */
+		$this->start_controls_tab(
+			'play_normal_tab',
+			[
+				'label' => __( 'Normal', 'gtew' ),
+			]
+		);
+		
+		$this->add_control(
+			'play_icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}}',
+				],
+				'default'=>'#bf3939'
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'play_shadow',
+				'label' => esc_html__( 'Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid',
+			]
+		);
+		
+		$this->end_controls_tab();
+		
+		/**
+		 *  Hover tab
+		 */
+		$this->start_controls_tab(
+			'play_hover_tabs',
+			[
+				'label' => __( 'Hover', 'gtew' ),
+			]
+		);
+
+	
+		$this->add_control(
+			'play_icon_color_hover',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control--overlaid:hover' => 'background: {{VALUE}}',
+				],
+			]
+		);
+	
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'play_shadow_hover',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid:hover',
+			]
+		);
+	
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+        $this->end_controls_section();
+    }
    
 	/**
 	 * Render alert widget output on the frontend.
@@ -999,31 +1156,77 @@ class slider extends Widget_Base {
 	 */
 	protected function render() {
         $settings = $this->get_settings_for_display();
-		//print_r($settings['direction']);
 		$id= $this->get_id();
+
+		//Video Type
+		$video_type 		= $settings['video_type'];
+		//Poster
+		$video_poster 		= $settings['video_poster'];
+		$poster_url			= $video_poster['url'];
+		//Youtube
+		$youtube_url 		= $settings['youtube_url'];
+		parse_str( parse_url( $youtube_url, PHP_URL_QUERY ), $get_youtube_id );
+		// Vimeo 
+		$vimeo_url 			= $settings['vimeo_url'];
+		$get_vimeo_id 		= (int) substr(parse_url($vimeo_url, PHP_URL_PATH), 1);
+
+		if($video_type=='youtube'){
+			$video_id 		=  $get_youtube_id['v'];
+		}
+		if($video_type=='vimeo'){
+			$video_id 		=  $get_vimeo_id;
+		}
         ?>
-		
+
 	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
 	    <?php
 		if($settings['thumb_direction']=='left'){
 		?>
 		<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
-			<div class="swiper-wrapper">
+				<div class="swiper-wrapper">
 				<?php
-				foreach ( $settings['gallery'] as $image ) {?>
-				<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-				<?php } ?>
+				$count=0;
+				foreach ( $settings['gallery'] as $image ):
+					$count=$count+1;
+					if($count==1 && !empty( $video_id ) ):
+				?>
+				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<?php else:?>
+					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+					<?php
+					endif;
+					endforeach;
+					 ?>
+				</div>
 			</div>
-		</div>
 		<?php }?>	
+		<!--Main Slide-->
 		<div class="swiper-container gallery-slider slider-<?php echo $id;?>">
 			<div class="swiper-wrapper">
 				<?php
-				foreach ( $settings['gallery'] as $image ) {?>
+				$count=0;
+				foreach ( $settings['gallery'] as $image ):
+					$count=$count+1;
+					if($count==1 && !empty( $video_type ) ):
+				?>
+				<div class="swiper-slide main-slide video">
+					<div id="player" 
+						data-plyr-provider="<?php echo esc_attr( $video_type ); ?>" 
+						data-plyr-embed-id="<?php echo esc_attr( $video_id );?>" 
+						data-poster="<?php echo esc_url( $poster_url );?>"
+						>
+
+					</div>
+				</div>
+				<?php else: ?>
+				
 				<div class="swiper-slide main-slide">
 					<?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?>
 				</div>
-				<?php } ?>
+				<?php 
+					endif;
+				endforeach; 
+				?>
 			</div>
 			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
@@ -1039,27 +1242,45 @@ class slider extends Widget_Base {
 			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
-					foreach ( $settings['gallery'] as $image ) {?>
+				$count=0;
+				foreach ( $settings['gallery'] as $image ):
+					$count=$count+1;
+					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
+				?>
+				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<?php else:?>
 					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-					<?php } ?>
+					<?php
+					endif;
+					endforeach;
+					 ?>
 				</div>
 			</div>
 		<?php }?>
 
-		<?php
-		if($settings['direction']=='horizontal'){
-		?>
+			<?php
+			if($settings['direction']=='horizontal'){
+			?>
 			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
-					foreach ( $settings['gallery'] as $image ) {?>
+				$count=0;
+				foreach ( $settings['gallery'] as $image ):
+					$count=$count+1;
+					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
+				?>
+				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<?php else:?>
 					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-					<?php } ?>
+					<?php
+					endif;
+					endforeach;
+					 ?>
 				</div>
 			</div>
 		<?php }?>
 	</div>
-	
+	<script> const player = new Plyr('#player');</script>				
     <?php
         
     }

@@ -63,6 +63,8 @@ $window.on( 'elementor/frontend/init', function() {
         }
     });
 
+    
+
     /**
      * Hero Slider Finalized Here
      * 
@@ -83,5 +85,7 @@ $window.on( 'elementor/frontend/init', function() {
         }
     );
 });
+
+
 
 } (jQuery, window));
