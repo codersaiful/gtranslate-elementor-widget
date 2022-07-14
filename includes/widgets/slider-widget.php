@@ -335,7 +335,7 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Vimeo Link', 'gtew' ),
 				'type' => Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (Vimeo)',
-				'default' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
+				'default' => 'https://vimeo.com/38648446',
 				'label_block' => true,
 				'condition' => [
 					'video_type' => 'vimeo',
