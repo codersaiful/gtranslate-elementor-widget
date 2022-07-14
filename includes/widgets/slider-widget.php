@@ -312,7 +312,7 @@ class slider extends Widget_Base {
 				'options' => [
 					'youtube' => esc_html__( 'YouTube', 'gtew' ),
 					'vimeo' => esc_html__( 'Vimeo', 'gtew' ),
-					'hosted' => esc_html__( 'Self Hosted', 'gtew' ),
+					//'hosted' => esc_html__( 'Self Hosted', 'gtew' ),
 				],
 			]
 		);
