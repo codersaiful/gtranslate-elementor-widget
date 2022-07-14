@@ -335,7 +335,7 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Vimeo Link', 'gtew' ),
 				'type' => Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (Vimeo)',
-				'default' => 'https://vimeo.com/38648446',
+				'default' => 'https://vimeo.com/311402402',
 				'label_block' => true,
 				'condition' => [
 					'video_type' => 'vimeo',
@@ -1193,7 +1193,10 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_id ) ):
 				?>
-				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<div class="swiper-slide video">
+					<img src="<?php echo $poster_url;?>">
+					<i class="eicon-play"></i>
+				</div>
 				<?php else:?>
 					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
 					<?php
@@ -1250,7 +1253,10 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
 				?>
-				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<div class="swiper-slide video">
+					<img src="<?php echo $poster_url;?>">
+					<i class="eicon-play"></i>
+				</div>
 				<?php else:?>
 					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
 					<?php
@@ -1272,7 +1278,10 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
 				?>
-				<div class="swiper-slide video"><img src="<?php echo $poster_url;?>"></div>
+				<div class="swiper-slide video">
+					<img src="<?php echo $poster_url;?>">
+					<i class="eicon-play"></i>
+				</div>
 				<?php else:?>
 					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
 					<?php
