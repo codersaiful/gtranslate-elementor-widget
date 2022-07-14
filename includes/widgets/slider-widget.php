@@ -144,7 +144,7 @@ class slider extends Widget_Base {
 			[
 				'label' => __( 'Delay', 'gtew' ),
 				'type' => Controls_Manager::NUMBER,
-				'min' => 1000,
+				'min' => 0,
 				'max' => 7000,
 				'step' => 1000,
 				'default' => 5000,
@@ -1216,7 +1216,7 @@ class slider extends Widget_Base {
 					if($count==1 && !empty( $video_type ) ):
 				?>
 				<div class="swiper-slide main-slide video">
-					<div id="player" 
+					<div id="player-<?php echo $id;?>" 
 						data-plyr-provider="<?php echo esc_attr( $video_type ); ?>" 
 						data-plyr-embed-id="<?php echo esc_attr( $video_id );?>" 
 						data-poster="<?php echo esc_url( $poster_url );?>"
@@ -1292,7 +1292,7 @@ class slider extends Widget_Base {
 			</div>
 		<?php }?>
 	</div>
-	<script> const player = new Plyr('#player');</script>				
+	<script> new Plyr('#player-<?php echo $id;?>');</script>				
     <?php
         
     }
