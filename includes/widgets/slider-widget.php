@@ -1269,8 +1269,6 @@ class slider extends Widget_Base {
 				<div class="swiper-slide main-slide video">
 					<video id="player-<?php echo $id;?>" playsinline controls data-poster="<?php echo esc_url( $poster_url );?>">
 						<source src="<?php echo $external_url;?>" type="video/mp4" />
-						<!-- Captions are optional -->
-						<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
 					</video>
 				</div>
 				<?php }?>

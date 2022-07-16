@@ -218,3 +218,6 @@ body .lang-list a{
   height: 100%;
   position: relative;
 }
+.plyr audio, .plyr iframe, .plyr video {
+  object-fit: cover;
+}
