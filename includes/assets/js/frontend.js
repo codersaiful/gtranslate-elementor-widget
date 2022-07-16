@@ -10,7 +10,7 @@ $window.on( 'elementor/frontend/init', function() {
     
     var ModuleBase = elementorModules.frontend.handlers.Base;
 
-    var Hero_Slider = EM.frontend.handlers.Base.extend({
+    var Product_Slider = EM.frontend.handlers.Base.extend({
         onInit: function(){
             this.run();
         },
@@ -25,7 +25,8 @@ $window.on( 'elementor/frontend/init', function() {
              * get data on editor mode
              */
             var $settings = this.getElementSettings();
-            console.log($id);
+            
+            //console.log($id);
             var slider = new Swiper('.slider-'+ $id, {
                 slidesPerView: 1,
                 centeredSlides: $settings.centeredSlides=='yes' ? true : false,
@@ -33,11 +34,7 @@ $window.on( 'elementor/frontend/init', function() {
                 loopedSlides: 6,
                 speed: $settings.speed,
                 autoHeight: $settings.autoHeight=='yes' ? true : false,
-                //centeredSlides: $settings.centeredSlides=='yes' ? true : false,
-                //rewind:true,
-                autoplay: {
-                    delay: $settings.delay,
-                },
+                autoplay:$settings.autoplay=='yes' ? true : false,
                 pagination: {
                   el: ".swiper-pagination",
                   type:$settings.pagination_type,
@@ -79,7 +76,7 @@ $window.on( 'elementor/frontend/init', function() {
     EF.hooks.addAction(
         'frontend/element_ready/slider.default',
         function ($scope) {
-                EF.elementsHandler.addHandler(Hero_Slider, {
+                EF.elementsHandler.addHandler(Product_Slider, {
                         $element: $scope,
                 });
         }

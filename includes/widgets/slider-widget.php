@@ -140,7 +140,19 @@ class slider extends Widget_Base {
 				'frontend_available' => true,
 			]
 		);
-        $this->add_control(
+		$this->add_control(
+			'autoplay',
+			[
+				'label' => __( 'Auto Play', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'gtew' ),
+				'label_off' => __( 'No', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'frontend_available' => true,
+			]
+		);
+    /*     $this->add_control(
 			'delay',
 			[
 				'label' => __( 'Delay', 'gtew' ),
@@ -150,8 +162,9 @@ class slider extends Widget_Base {
 				'step' => 1000,
 				'default' => 5000,
 				'frontend_available' => true,
+				'condition' => ['autoPlay'=> 'yes']
 			]
-		);
+		); */
 	
 
         $this->add_control(
