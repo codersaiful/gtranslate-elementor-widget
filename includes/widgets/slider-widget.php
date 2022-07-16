@@ -548,9 +548,9 @@ class slider extends Widget_Base {
 		$this->add_control(
 			'thumbs_ratio',
 			[
-				'label' => esc_html__( 'Ratio', 'elementor-pro' ),
+				'label' => esc_html__( 'Ratio', 'gtew' ),
 				'type' => Controls_Manager::SELECT,
-				'default' => '219',
+				'default' => '11',
 				'options' => [
 					'169' => '16:9',
 					'219' => '21:9',
@@ -1102,7 +1102,23 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-     
+		$this->add_responsive_control(
+			'paly_radius',
+			[
+				'label'       => esc_html__( 'Border Radius', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .plyr__control--overlaid' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 		$this->start_controls_tabs(
 			'play_normal_tabs'
 		);
@@ -1208,6 +1224,9 @@ class slider extends Widget_Base {
 		if($video_type=='vimeo'){
 			$video_id 		=  $get_vimeo_id;
 		}
+		if($video_type=='hosted'){
+			$video_id 		=  999; //hardcoded id cause self hosted video not generated video id
+		}
 		//External 
 		$external_url= $settings['external_url'];
 
@@ -1216,8 +1235,9 @@ class slider extends Widget_Base {
 	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
 	    <?php
 		if($settings['thumb_direction']=='left'){
-		?>
-		<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
+		?> 
+			<!--Slide Thumbnail-->
+			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
 				$count=0;
@@ -1225,13 +1245,13 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_id ) ):
 				?>
-				<div class="swiper-slide video">
-					<img src="<?php echo $poster_url;?>">
+				<div class="swiper-slide video-thumb">
+					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
 					<div class="swiper-slide">
-						<div class="thumb-item" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 					</div>
 					<?php
 					endif;
@@ -1299,8 +1319,8 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_type )):
 				?>
-				<div class="swiper-slide video">
-					<img src="<?php echo $poster_url;?>">
+				<div class="swiper-slide video-thumb">
+					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
@@ -1326,13 +1346,13 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_id ) ):
 				?>
-				<div class="swiper-slide video">
-					<img src="<?php echo $poster_url;?>">
+				<div class="swiper-slide video-thumb">
+					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
 					<div class="swiper-slide">
-						<div class="thumb-item" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 					</div>
 					<?php
 					endif;
