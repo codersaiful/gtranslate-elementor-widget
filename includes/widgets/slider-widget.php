@@ -14,6 +14,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Plugin;
 use Elementor\Utils;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -312,7 +313,7 @@ class slider extends Widget_Base {
 				'options' => [
 					'youtube' => esc_html__( 'YouTube', 'gtew' ),
 					'vimeo' => esc_html__( 'Vimeo', 'gtew' ),
-					//'hosted' => esc_html__( 'Self Hosted', 'gtew' ),
+					'hosted' => esc_html__( 'Self Hosted', 'gtew' ),
 				],
 			]
 		);
@@ -335,10 +336,24 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Vimeo Link', 'gtew' ),
 				'type' => Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (Vimeo)',
-				'default' => 'https://vimeo.com/311402402',
+				'default' => 'https://vimeo.com/4681358',
 				'label_block' => true,
 				'condition' => [
 					'video_type' => 'vimeo',
+				],
+			]
+		);
+
+		$this->add_control(
+			'external_url',
+			[
+				'label' => esc_html__( 'External Link', 'gtew' ),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => esc_html__( 'Enter your URL', 'gtew' ) . ' (Vimeo)',
+				'default' => 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
+				'label_block' => true,
+				'condition' => [
+					'video_type' => 'hosted',
 				],
 			]
 		);
@@ -451,7 +466,7 @@ class slider extends Widget_Base {
 			[
 				'name' => 'thumb_normal_border',
 				'label' => esc_html__( 'Border', 'gtew' ),
-				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide img',
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide',
 			]
 		);
 		$this->add_responsive_control(
@@ -467,7 +482,7 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .gallery-thumbs .swiper-slide img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -530,7 +545,21 @@ class slider extends Widget_Base {
 				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide::after',
 			]
 		);
-
+		$this->add_control(
+			'thumbs_ratio',
+			[
+				'label' => esc_html__( 'Ratio', 'elementor-pro' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '219',
+				'options' => [
+					'169' => '16:9',
+					'219' => '21:9',
+					'43' => '4:3',
+					'11' => '1:1',
+				],
+				'prefix_class' => 'elementor-aspect-ratio-',
+			]
+		);
 
 		$this->end_controls_tab();
 
@@ -639,7 +668,7 @@ class slider extends Widget_Base {
 			[
 				'name' => 'thumb_active_border',
 				'label' => esc_html__( 'Border', 'gtew' ),
-				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img',
+				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active',
 			]
 		);
 		$this->add_responsive_control(
@@ -655,7 +684,7 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1179,6 +1208,9 @@ class slider extends Widget_Base {
 		if($video_type=='vimeo'){
 			$video_id 		=  $get_vimeo_id;
 		}
+		//External 
+		$external_url= $settings['external_url'];
+
         ?>
 
 	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
@@ -1198,14 +1230,17 @@ class slider extends Widget_Base {
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+					<div class="swiper-slide">
+						<div class="thumb-item" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+					</div>
 					<?php
 					endif;
 					endforeach;
 					 ?>
 				</div>
 			</div>
-		<?php }?>	
+		<?php }?>
+
 		<!--Main Slide-->
 		<div class="swiper-container gallery-slider slider-<?php echo $id;?>">
 			<div class="swiper-wrapper">
@@ -1214,6 +1249,9 @@ class slider extends Widget_Base {
 				foreach ( $settings['gallery'] as $image ):
 					$count=$count+1;
 					if($count==1 && !empty( $video_type ) ):
+				?>
+				<?php
+				if( $video_type =='youtube' ||  $video_type =='vimeo'){
 				?>
 				<div class="swiper-slide main-slide video">
 					<div id="player-<?php echo $id;?>" 
@@ -1224,11 +1262,21 @@ class slider extends Widget_Base {
 
 					</div>
 				</div>
+				<?php 
+				} 
+				if($video_type=='hosted' && !empty($external_url)){
+				?>
+				<div class="swiper-slide main-slide video">
+					<video id="player-<?php echo $id;?>" playsinline controls data-poster="<?php echo esc_url( $poster_url );?>">
+						<source src="<?php echo $external_url;?>" type="video/mp4" />
+						<!-- Captions are optional -->
+						<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
+					</video>
+				</div>
+				<?php }?>
 				<?php else: ?>
 				
-				<div class="swiper-slide main-slide">
-					<?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?>
-				</div>
+				<div class="swiper-slide main-slide" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 				<?php 
 					endif;
 				endforeach; 
@@ -1251,19 +1299,21 @@ class slider extends Widget_Base {
 				$count=0;
 				foreach ( $settings['gallery'] as $image ):
 					$count=$count+1;
-					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
+					if($count==1 && !empty( $video_type )):
 				?>
 				<div class="swiper-slide video">
 					<img src="<?php echo $poster_url;?>">
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
-					<?php
-					endif;
-					endforeach;
-					 ?>
-				</div>
+					<div class="swiper-slide">
+						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+						</div>
+						<?php
+						endif;
+						endforeach;
+						?>
+					</div>
 			</div>
 		<?php }?>
 
@@ -1276,14 +1326,16 @@ class slider extends Widget_Base {
 				$count=0;
 				foreach ( $settings['gallery'] as $image ):
 					$count=$count+1;
-					if($count==1 && !empty( $youtube_url ) || !empty( $vimeo_url )):
+					if($count==1 && !empty( $video_id ) ):
 				?>
 				<div class="swiper-slide video">
 					<img src="<?php echo $poster_url;?>">
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide"><?php echo '<img src="' . esc_attr( $image['url'] ) . '">'; ?></div>
+					<div class="swiper-slide">
+						<div class="thumb-item" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+					</div>
 					<?php
 					endif;
 					endforeach;

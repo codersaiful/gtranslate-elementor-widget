@@ -161,6 +161,7 @@ body .lang-list a{
     align-self: start;
     /* flex: 1; */
 }
+
 .gallery-thumbs .swiper-slide {
   -webkit-transition: all .7s ease;
   -moz-transition: all .7s ease;
@@ -209,5 +210,11 @@ body .lang-list a{
   z-index: 2;
 }
 .gallery .swiper-slide.video {
+  position: relative;
+}
+.main-slide, .gallery-thumbs .swiper-slide .thumb-item{
+  background: no-repeat 50%;
+  background-size: cover;
+  height: 100%;
   position: relative;
 }
