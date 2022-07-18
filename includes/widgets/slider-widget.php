@@ -499,7 +499,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-		/* $this->add_responsive_control(
+		 $this->add_responsive_control(
 			'thumb_normal_scale',
 			[
 				'label' => esc_html__( 'Scale', 'gtew' ),
@@ -520,7 +520,7 @@ class slider extends Widget_Base {
 					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
 				],
 			]
-		); */
+		);
 		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
@@ -608,7 +608,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-	/* 	$this->add_responsive_control(
+	$this->add_responsive_control(
 			'thumb_hover_scale',
 			[
 				'label' => esc_html__( 'Scale', 'gtew' ),
@@ -623,13 +623,13 @@ class slider extends Widget_Base {
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .gallery-thumbs .swiper-slide:hover' => 'transform:scale({{SIZE}});',
 				],
 			]
-		); */
+		);
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -701,7 +701,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-		/* $this->add_responsive_control(
+		$this->add_responsive_control(
 			'thumb_active_scale',
 			[
 				'label' => esc_html__( 'Scale', 'gtew' ),
@@ -716,13 +716,13 @@ class slider extends Widget_Base {
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
 				],
 			]
-		); */
+		);
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
