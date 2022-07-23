@@ -222,7 +222,7 @@ final class Plugin {
 
 		//require_once( __DIR__ . '/widgets/gt-widget.php' );
 		require_once( __DIR__ . '/widgets/slider-widget.php' );
-		//require_once( __DIR__ . '/inc.php' );
+		require_once( __DIR__ . '/inc.php' );
 
 		//$widgets_manager->register( new gt_widget() );
 		$widgets_manager->register( new slider() );

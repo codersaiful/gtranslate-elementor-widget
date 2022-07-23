@@ -187,7 +187,7 @@ class slider extends Widget_Base {
 				'label_on' => __( 'Yes', 'gtew' ),
 				'label_off' => __( 'No', 'gtew' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
+				'default' => 'no',
                 'frontend_available' => true,
 			]
 		);
@@ -820,6 +820,7 @@ class slider extends Widget_Base {
 						],
 					],
 					//'toggle' => true,
+					'default'=>'left',
 					'condition'=>['direction'=>'vertical']
 				]
 			);
@@ -1093,6 +1094,15 @@ class slider extends Widget_Base {
                 'tab'       => Controls_Manager::TAB_STYLE,
             ]
         );
+		$this->add_control(
+			'icon_play',
+			[
+				'label' => esc_html__( 'Play Icons', 'gtew' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'plyr',
+				'options' => $this->sprites_icon(),
+			]
+		);
         $this->add_responsive_control(
 			'play_size',
 			[
@@ -1219,6 +1229,10 @@ class slider extends Widget_Base {
         $settings = $this->get_settings_for_display();
 		$id= $this->get_id();
 
+		if(function_exists('svg_common_icon')){
+			svg_common_icon();
+		}
+		include_once( 'play-icons/play-sprites.svg');
 		//Video Type
 		$video_type 		= $settings['video_type'];
 		//Poster
@@ -1375,9 +1389,38 @@ class slider extends Widget_Base {
 			</div>
 		<?php }?>
 	</div>
-	<script> new Plyr('#player-<?php echo $id;?>');</script>				
+
+	<script>
+		new Plyr('#player-<?php echo $id;?>', {
+		iconPrefix: '<?php echo $settings['icon_play']; ?>',
+		});
+	</script>				
     <?php
         
     }
+	function sprites_icon(){
+		$icons=array(
+			'plyr' 	   => 'Default',
+			'button-1' => 'Icon-1',
+			'button-2' => 'Icon-2',
+			'button-3' => 'Icon-3',
+			'button-4' => 'Icon-4',
+			'button-5' => 'Icon-5',
+			'button-6' =>'Icon-6', 
+			'button-7' => 'Icon-7',
+			'button-8' => 'Icon-8',
+			'button-9' => 'Icon-9',
+			'button-10' => 'Icon-10',
+		);
+	
+		$iconList=[];
+		foreach ( $icons as $icon=>$val ) {
+			$iconList[$icon] = $val;
 
-}
+		}
+		return $iconList;
+	}
+	
+}//End Class
+
+
