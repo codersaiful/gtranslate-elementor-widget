@@ -1161,7 +1161,9 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Icon Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .plyr__control--overlaid, .plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true]' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr__controls .plyr__control:hover' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr__controls .plyr__control[aria-expanded=true]' => 'background: {{VALUE}}',
 					'{{WRAPPER}} .plyr--full-ui input[type=range]' => 'color: {{VALUE}}',
 					
 				],

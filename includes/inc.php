@@ -55,7 +55,12 @@
                 </symbol>
                 <symbol id="'.$icon.'-exit-fullscreen" viewBox="0 0 18 18">
                     <path d="M1 12h3.6l-4 4L2 17.4l4-4V17h2v-7H1zM16 .6l-4 4V1h-2v7h7V6h-3.6l4-4z" />
-                </symbol>'; 
+                </symbol>
+                <symbol id="'.$icon.'-pip" viewBox="0 0 18 18">
+                    <path d="M13.293 3.293L7.022 9.564l1.414 1.414 6.271-6.271L17 7V1h-6z" />
+                    <path d="M13 15H3V5h5V3H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-6h-2v5z" />
+                </symbol>
+                '; 
             }
             echo '<svg>';
 
