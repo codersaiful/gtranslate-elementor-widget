@@ -227,6 +227,10 @@ class slider extends Widget_Base {
 					'2' => __( '2', 'gtew' ),
 					'3' => __( '3', 'gtew' ),
 					'4' => __( '4', 'gtew' ),
+					'5' => __( '5', 'gtew' ),
+					'6' => __( '6', 'gtew' ),
+					'7' => __( '7', 'gtew' ),
+					'8' => __( '8', 'gtew' ),
 				],
 				'separator'=> 'before'
 			]
@@ -604,7 +608,7 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .gallery-thumbs .swiper-slide img:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
