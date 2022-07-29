@@ -402,32 +402,6 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Previous Icon', 'gtew' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
-					'value' => 'fas fa-arrow-left',
-					'library' => 'fa-solid',
-				],
-				'recommended' => [
-					'fa-solid' => [
-						'circle-left',
-						'arrow-left',
-						'arrow-alt-circle-left',
-						'long-arrow-alt-left',
-					],
-					'fa-regular' => [
-						'circle-left',
-						'arrow-left',
-						'arrow-alt-circle-left',
-						'long-arrow-alt-left',
-					],
-				],
-				'skin'=>'inline',
-			]
-		);
-		$this->add_control(
-			'next_icon',
-			[
-				'label' => esc_html__( 'Next Icon', 'gtew' ),
-				'type' => Controls_Manager::ICONS,
-				'default' => [
 					'value' => 'fas fa-arrow-right',
 					'library' => 'fa-solid',
 				],
@@ -443,6 +417,32 @@ class slider extends Widget_Base {
 						'arrow-right',
 						'arrow-alt-circle-right',
 						'long-arrow-alt-right',
+					],
+				],
+				'skin'=>'inline',
+			]
+		);
+		$this->add_control(
+			'next_icon',
+			[
+				'label' => esc_html__( 'Next Icon', 'gtew' ),
+				'type' => Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fas fa-arrow-left',
+					'library' => 'fa-solid',
+				],
+				'recommended' => [
+					'fa-solid' => [
+						'circle-left',
+						'arrow-left',
+						'arrow-alt-circle-left',
+						'long-arrow-alt-left',
+					],
+					'fa-regular' => [
+						'circle-left',
+						'arrow-left',
+						'arrow-alt-circle-left',
+						'long-arrow-alt-left',
 					],
 				],
 				'skin'=>'inline',
@@ -503,7 +503,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-		 $this->add_responsive_control(
+		/*  $this->add_responsive_control(
 			'thumb_normal_scale',
 			[
 				'label' => esc_html__( 'Scale', 'gtew' ),
@@ -523,8 +523,7 @@ class slider extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
 				],
-			]
-		);
+			]; */
 		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
@@ -571,6 +570,7 @@ class slider extends Widget_Base {
 				'options' => [
 					'169' => '16:9',
 					'219' => '21:9',
+					'32'  => '3:2',
 					'43' => '4:3',
 					'11' => '1:1',
 				],
@@ -612,7 +612,7 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-	$this->add_responsive_control(
+	/* $this->add_responsive_control(
 			'thumb_hover_scale',
 			[
 				'label' => esc_html__( 'Scale', 'gtew' ),
@@ -633,7 +633,7 @@ class slider extends Widget_Base {
 					'{{WRAPPER}} .gallery-thumbs .swiper-slide:hover' => 'transform:scale({{SIZE}});',
 				],
 			]
-		);
+		); */
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -723,7 +723,7 @@ class slider extends Widget_Base {
 					'size' => 1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gallery-thumbs .swiper-slide' => 'transform:scale({{SIZE}});',
+					'{{WRAPPER}} .gallery-thumbs .swiper-slide.swiper-slide-active' => 'transform:scale({{SIZE}});',
 				],
 			]
 		);
@@ -850,7 +850,7 @@ class slider extends Widget_Base {
 						'size' => 100,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .swiper-slide.main-slide img' => 'width:{{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .swiper-container.gallery-slider' => 'width:{{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -867,7 +867,7 @@ class slider extends Widget_Base {
 						'bottom' => '',
 						'left'   => '',
 					],
-					'isLinked' => '',
+					'isLinked' => false,
 					'selectors'   => [
 						'{{WRAPPER}} .swiper-container.gallery-slider ' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
@@ -1003,8 +1003,8 @@ class slider extends Widget_Base {
 					'size' => '44',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .slide-arrow__prev' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .slide-arrow__next' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow__prev' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .slide-arrow__next' => 'margin-left: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1270,7 +1270,7 @@ class slider extends Widget_Base {
 		if($settings['thumb_direction']=='left'){
 		?> 
 			<!--Slide Thumbnail-->
-			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
+			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?> thumb-<?php echo $settings['thumb_direction'] ?>">
 				<div class="swiper-wrapper">
 				<?php
 				$count=0;
@@ -1344,7 +1344,7 @@ class slider extends Widget_Base {
 		<?php
 		if($settings['thumb_direction']=='right'){
 		?>
-			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
+			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?> thumb-<?php echo $settings['thumb_direction'] ?>">
 				<div class="swiper-wrapper">
 				<?php
 				$count=0;

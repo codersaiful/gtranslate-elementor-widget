@@ -122,10 +122,10 @@ body .lang-list a{
   display: none;
 }
 .slide-arrow__prev {
-  left: 0;
+  right: 0;
 }
 .slide-arrow__next {
-  right: 0;
+  left: 0;
 }
 .slide-arrow .material-icons {
   font-size: 50px;
@@ -155,11 +155,16 @@ body .lang-list a{
     float: left;
     width: 20%;
     height: 400px;
-    margin-left: 10px;
     flex-grow: 2;
     justify-content: stretch;
     align-self: start;
     /* flex: 1; */
+}
+.gallery-vertical .gallery-thumbs.thumb-left{
+  margin-right: 10px;
+}
+.gallery-vertical .gallery-thumbs.thumb-right{
+	 margin-left: 10px;
 }
 
 .gallery-thumbs .swiper-slide {
@@ -226,4 +231,7 @@ body .lang-list a{
 }
 .gallery-horizontal .gallery-thumbs .swiper-slide{
   height: auto;
+}
+.swiper-container-vertical>.swiper-wrapper {
+  align-items: center;
 }
