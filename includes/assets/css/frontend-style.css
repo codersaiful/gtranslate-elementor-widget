@@ -235,3 +235,6 @@ body .lang-list a{
 .swiper-container-vertical>.swiper-wrapper {
   align-items: center;
 }
+.gallery .swiper-lazy-preloader{
+  border: none;
+}

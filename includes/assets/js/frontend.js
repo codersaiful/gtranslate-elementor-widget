@@ -35,6 +35,7 @@ $window.on( 'elementor/frontend/init', function() {
                 speed: $settings.speed,
                 autoHeight: $settings.autoHeight=='yes' ? true : false,
                 autoplay:$settings.autoplay=='yes' ? true : false,
+                //lazy: $settings.lazy =='yes' ? true : false,
                 pagination: {
                   el: ".swiper-pagination",
                   type:$settings.pagination_type,

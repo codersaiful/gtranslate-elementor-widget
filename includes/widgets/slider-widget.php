@@ -264,6 +264,19 @@ class slider extends Widget_Base {
                 ],
 			]
 		);
+		 /*$this->add_control(
+			'lazy',
+			[
+				'label' => __( 'Lazyload', 'gtew' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'gtew' ),
+				'label_off' => __( 'No', 'gtew' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+                'frontend_available' => true,
+				'separator' => 'before'
+			]
+			);
 
       /* $this->add_control(
 			'navigation',
@@ -277,33 +290,7 @@ class slider extends Widget_Base {
                 'frontend_available' => true,
 			]
 		);
-       /* $this->add_control(
-			'pagination',
-			[
-				'label' => __( 'Pagination', 'gtew' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'gtew' ),
-				'label_off' => __( 'No', 'gtew' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
-                'frontend_available' => true,
-			]
-		);
-        //'bullets' | 'fraction' | 'progressbar' | 'custom'
-        $this->add_control(
-			'pagination_type',
-			[
-				'label' => __( 'Pagination Type', 'gtew' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'bullets',
-				'frontend_available' => true,
-				'options' => [
-					'bullets'  => __( 'Bullets', 'gtew' ),
-					'fraction' => __( 'Fraction', 'gtew' ),
-					'progressbar' => __( 'Progressbar', 'gtew' ),
-				],
-			]
-		); */
+
 
         $this->end_controls_section();
     }
@@ -1306,13 +1293,12 @@ class slider extends Widget_Base {
 				<?php
 				if( $video_type =='youtube' ||  $video_type =='vimeo'){
 				?>
-				<div class="swiper-slide main-slide video">
+				<div class="swiper-slide main-slide video swiper-lazy">
 					<div id="player-<?php echo $id;?>" 
 						data-plyr-provider="<?php echo esc_attr( $video_type ); ?>" 
 						data-plyr-embed-id="<?php echo esc_attr( $video_id );?>" 
 						data-poster="<?php echo esc_url( $poster_url );?>"
 						>
-
 					</div>
 				</div>
 				<?php 
@@ -1327,19 +1313,35 @@ class slider extends Widget_Base {
 				<?php }?>
 				<?php else: ?>
 				
-				<div class="swiper-slide main-slide" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+				<div class="swiper-slide main-slide" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)">
+					
+				</div>
 				<?php 
 					endif;
 				endforeach; 
 				?>
 			</div>
+			<?php
+			if($settings['direction']=='vertical'){
+			 ?>
 			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
 			</div>
 			<div class="slide-arrow slide-arrow__next slideNext-btn">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
 			</div>
+			<?php }?>
 		</div>
+		<?php
+			if($settings['direction']=='horizontal'){
+			 ?>
+			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
+				<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+			</div>
+			<div class="slide-arrow slide-arrow__next slideNext-btn">
+				<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+			</div>
+			<?php }?>
 		
 		<?php
 		if($settings['thumb_direction']=='right'){
