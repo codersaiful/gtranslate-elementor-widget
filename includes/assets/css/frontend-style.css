@@ -65,7 +65,7 @@ body .lang-list a{
 
 .gallery {
   width: 100%;
-  margin: 40px auto;
+  /* margin: 40px auto; */
 }
 .gallery-slider {
   width: 100%;
@@ -106,14 +106,15 @@ body .lang-list a{
 
 .slide-arrow {
   position: absolute;
-  display: block;
+  display: inline-flex;
   z-index: 10;
   top: 50%;
   line-height: 1;
-  margin-top: -2em;
+  /* margin-top: -2em; */
   cursor: pointer;
   background: #bf3939;
   padding: 7px;
+  transform: translateY(-50%);
 }
 .slide-arrow:hover {
   /* opacity: 0.6; */
@@ -153,7 +154,7 @@ body .lang-list a{
 }
 .gallery-vertical .gallery-thumbs {
     float: left;
-    width: 20%;
+    width:150px;
     height: 400px;
     flex-grow: 2;
     justify-content: stretch;
@@ -237,4 +238,7 @@ body .lang-list a{
 }
 .gallery .swiper-lazy-preloader{
   border: none;
+}
+.horizontal-wrap{
+  position: relative;
 }
