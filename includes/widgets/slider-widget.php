@@ -290,7 +290,8 @@ class slider extends Widget_Base {
                 'frontend_available' => true,
 			]
 		);
-
+       */
+       
 
         $this->end_controls_section();
     }
@@ -1116,8 +1117,59 @@ class slider extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'play_controls_color',
+			[
+				'label' => esc_html__( 'Control Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__controls .plyr__control[aria-expanded=true]' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr--full-ui input[type=range]' => 'color: {{VALUE}}',
+					
+				],
+				'default'=>'#bf3939'
+			]
+		);
+		
+		$this->start_controls_tabs(
+			'play_normal_tabs'
+		);
+		/**
+		 * Normal tab
+		 */
+		$this->start_controls_tab(
+			'play_normal_tab',
+			[
+				'label' => __( 'Normal', 'gtew' ),
+			]
+		);
+		
+		$this->add_control(
+			'play_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}}',
+					
+				],
+				'default'=>'#bf3939'
+			]
+		);
+		$this->add_control(
+			'play_icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control--overlaid svg' => 'color: {{VALUE}}',
+				],
+				'default'=>'#bf3939'
+			]
+		);
+
 		$this->add_responsive_control(
-			'paly_radius',
+			'play_radius',
 			[
 				'label'       => esc_html__( 'Border Radius', 'gtew' ),
 				'type'        => Controls_Manager::DIMENSIONS,
@@ -1133,42 +1185,40 @@ class slider extends Widget_Base {
 				],
 			]
 		);
-		$this->start_controls_tabs(
-			'play_normal_tabs'
-		);
-		/**
-		 * Normal tab
-		 */
-		$this->start_controls_tab(
-			'play_normal_tab',
-			[
-				'label' => __( 'Normal', 'gtew' ),
-			]
-		);
 		
-		$this->add_control(
-			'play_icon_color',
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => esc_html__( 'Icon Color', 'gtew' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}}',
-					'{{WRAPPER}} .plyr__controls .plyr__control:hover' => 'background: {{VALUE}}',
-					'{{WRAPPER}} .plyr__controls .plyr__control[aria-expanded=true]' => 'background: {{VALUE}}',
-					'{{WRAPPER}} .plyr--full-ui input[type=range]' => 'color: {{VALUE}}',
-					
-				],
-				'default'=>'#bf3939'
+				'name' => 'play_border',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid',
 			]
 		);
-
 		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'play_shadow',
-				'label' => esc_html__( 'Shadow', 'gtew' ),
-				'selector' => '{{WRAPPER}} .plyr__control--overlaid',
+				'label' => esc_html__( 'Box Shadow', 'gtew' ),
+				'selector' => '{{WRAPPER}} .slide-arrow',
+			]
+		);
+		
+		$this->add_responsive_control(
+			'play_padding',
+			[
+				'label'       => esc_html__( 'Padding', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .plyr__control--overlaid' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 		
@@ -1186,22 +1236,80 @@ class slider extends Widget_Base {
 
 	
 		$this->add_control(
+			'play_bg_color_hover',
+			[
+				'label' => esc_html__( 'Background Color', 'gtew' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .plyr__control--overlaid:hover' => 'background: {{VALUE}}',
+					
+				],
+				'default'=>'#bf3939'
+			]
+		);
+		$this->add_control(
 			'play_icon_color_hover',
 			[
 				'label' => esc_html__( 'Icon Color', 'gtew' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .plyr__control--overlaid:hover' => 'background: {{VALUE}}',
+					'{{WRAPPER}} .plyr__control--overlaid:hover svg' => 'color: {{VALUE}}',
+				],
+				'default'=>'#bf3939'
+			]
+		);
+
+		$this->add_responsive_control(
+			'play_radius_hover',
+			[
+				'label'       => esc_html__( 'Border Radius', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .plyr__control--overlaid:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
-	
+		
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'play_border_hover',
+				'label' => esc_html__( 'Border', 'gtew' ),
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid:hover',
+			]
+		);
+		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'play_shadow_hover',
 				'label' => esc_html__( 'Box Shadow', 'gtew' ),
-				'selector' => '{{WRAPPER}} .plyr__control--overlaid:hover',
+				'selector' => '{{WRAPPER}} .slide-arrow',
+			]
+		);
+		
+		$this->add_responsive_control(
+			'play_padding_hover',
+			[
+				'label'       => esc_html__( 'Padding', 'gtew' ),
+				'type'        => Controls_Manager::DIMENSIONS,
+				'size_units'  => [ 'px', '%' ],
+				'placeholder' => [
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .plyr__control--overlaid' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 	
@@ -1251,7 +1359,7 @@ class slider extends Widget_Base {
 		$external_url= $settings['external_url'];
 
         ?>
-
+<div class="">
 	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
 	    <?php
 		if($settings['thumb_direction']=='left'){
@@ -1282,6 +1390,12 @@ class slider extends Widget_Base {
 		<?php }?>
 
 		<!--Main Slide-->
+		<?php
+		if($settings['direction']=='horizontal'){
+			echo '<div class="horizontal-wrap">';
+		}
+		 ?>
+		
 		<div class="swiper-container gallery-slider slider-<?php echo $id;?>">
 			<div class="swiper-wrapper">
 				<?php
@@ -1322,16 +1436,16 @@ class slider extends Widget_Base {
 				?>
 			</div>
 			<?php
-			if($settings['direction']=='vertical'){
-			 ?>
-			<div class="slide-arrow slide-arrow__prev slidePrev-btn">
-				<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
-			</div>
-			<div class="slide-arrow slide-arrow__next slideNext-btn">
-				<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
-			</div>
+			if($settings['direction']=='vertical'){?>
+				<div class="slide-arrow slide-arrow__prev slidePrev-btn">
+					<?php \Elementor\Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+				</div>
+				<div class="slide-arrow slide-arrow__next slideNext-btn">
+					<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
+				</div>
 			<?php }?>
 		</div>
+		<!--Navigation Outside of wrapper-->
 		<?php
 			if($settings['direction']=='horizontal'){
 			 ?>
@@ -1341,11 +1455,14 @@ class slider extends Widget_Base {
 			<div class="slide-arrow slide-arrow__next slideNext-btn">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?></i>
 			</div>
-			<?php }?>
-		
+		<?php }?>
 		<?php
-		if($settings['thumb_direction']=='right'){
-		?>
+		if($settings['direction']=='horizontal'){
+			echo '</div>';
+		}
+		 ?>
+		
+		<?php if($settings['thumb_direction']=='right'){?>
 			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?> thumb-<?php echo $settings['thumb_direction'] ?>">
 				<div class="swiper-wrapper">
 				<?php
@@ -1370,9 +1487,7 @@ class slider extends Widget_Base {
 			</div>
 		<?php }?>
 
-			<?php
-			if($settings['direction']=='horizontal'){
-			?>
+			<?php if($settings['direction']=='horizontal'){ ?>
 			<div class="swiper-container gallery-thumbs thumb-<?php echo $id?>">
 				<div class="swiper-wrapper">
 				<?php
@@ -1430,5 +1545,3 @@ class slider extends Widget_Base {
 	}
 	
 }//End Class
-
-
