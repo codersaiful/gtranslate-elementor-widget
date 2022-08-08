@@ -1164,7 +1164,7 @@ class slider extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .plyr__control--overlaid svg' => 'color: {{VALUE}}',
 				],
-				'default'=>'#bf3939'
+				'default'=>'#fff'
 			]
 		);
 
@@ -1200,7 +1200,7 @@ class slider extends Widget_Base {
 			[
 				'name' => 'play_shadow',
 				'label' => esc_html__( 'Box Shadow', 'gtew' ),
-				'selector' => '{{WRAPPER}} .slide-arrow',
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid',
 			]
 		);
 		
@@ -1255,7 +1255,7 @@ class slider extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .plyr__control--overlaid:hover svg' => 'color: {{VALUE}}',
 				],
-				'default'=>'#bf3939'
+				'default'=>'#ddd'
 			]
 		);
 
@@ -1291,7 +1291,7 @@ class slider extends Widget_Base {
 			[
 				'name' => 'play_shadow_hover',
 				'label' => esc_html__( 'Box Shadow', 'gtew' ),
-				'selector' => '{{WRAPPER}} .slide-arrow',
+				'selector' => '{{WRAPPER}} .plyr__control--overlaid:hover',
 			]
 		);
 		
@@ -1308,7 +1308,7 @@ class slider extends Widget_Base {
 					'left'   => '',
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .plyr__control--overlaid' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .plyr__control--overlaid:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);

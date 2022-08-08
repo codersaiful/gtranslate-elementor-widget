@@ -65,7 +65,7 @@ body .lang-list a{
 
 .gallery {
   width: 100%;
-  /* margin: 40px auto; */
+  margin-bottom: 20px;
 }
 .gallery-slider {
   width: 100%;
