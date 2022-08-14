@@ -178,7 +178,7 @@ body .lang-list a{
 .swiper-slide{
   position: relative;
 }
-.gallery-thumbs .swiper-slide .thumb-item::after{
+.gallery-thumbs .swiper-slide.thumb-item::after{
   content: "";
   position: absolute;
   width: 100%;
@@ -218,7 +218,7 @@ body .lang-list a{
 .gallery .swiper-slide.video-thumb {
   position: relative;
 }
-.main-slide, .gallery-thumbs .swiper-slide .thumb-item{
+.main-slide, .gallery-thumbs .swiper-slide.thumb-item{
   background: no-repeat 50%;
   background-size: cover;
   /* height: 100%; */
@@ -241,8 +241,4 @@ body .lang-list a{
 }
 .horizontal-wrap{
   position: relative;
-}
-.gallery-thumbs .swiper-slide {
-  height: auto !important;
-  margin-bottom: 15px !important;
 }

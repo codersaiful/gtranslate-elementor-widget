@@ -1359,7 +1359,7 @@ class slider extends Widget_Base {
 		$external_url= $settings['external_url'];
 
         ?>
-<div class="">
+		
 	<div class="gallery gallery-<?php echo $settings['direction']; ?>" >  
 	    <?php
 		if($settings['thumb_direction']=='left'){
@@ -1373,13 +1373,12 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_id ) ):
 				?>
-				<div class="swiper-slide video-thumb">
-					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
+				<div class="swiper-slide video-thumb thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)">
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide">
-						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
+					<div class="swiper-slide thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)">
+					
 					</div>
 					<?php
 					endif;
@@ -1471,14 +1470,11 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_type )):
 				?>
-				<div class="swiper-slides video-thumb">
-					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
+				<div class="swiper-slide video-thumb thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)">
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slides">
-						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
-						</div>
+					<div class="swiper-slide thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 						<?php
 						endif;
 						endforeach;
@@ -1496,14 +1492,11 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_id ) ):
 				?>
-				<div class="swiper-slide video-thumb">
-					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
+				<div class="swiper-slide video-thumb thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)">
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide">
-						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
-					</div>
+					<div class="swiper-slide thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 					<?php
 					endif;
 					endforeach;
@@ -1511,7 +1504,6 @@ class slider extends Widget_Base {
 				</div>
 			</div>
 		<?php }?>
-	</div>
 
 	<script>
 		new Plyr('#player-<?php echo $id;?>', {
