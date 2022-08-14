@@ -546,7 +546,7 @@ class slider extends Widget_Base {
 				'label' => esc_html__( 'Background', 'gtew' ),
 				'types' => [ 'classic', 'gradient' ],
 				'exclude'=> ['image'],
-				'selector' => '{{WRAPPER}} .gallery-thumbs .swiper-slide::after',
+				'selector' => '{{WRAPPER}} .swiper-slide .thumb-item::after',
 			]
 		);
 		$this->add_control(
@@ -1471,12 +1471,12 @@ class slider extends Widget_Base {
 					$count=$count+1;
 					if($count==1 && !empty( $video_type )):
 				?>
-				<div class="swiper-slide video-thumb">
+				<div class="swiper-slides video-thumb">
 					<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo $poster_url;?>)"></div>
 					<i class="eicon-play"></i>
 				</div>
 				<?php else:?>
-					<div class="swiper-slide">
+					<div class="swiper-slides">
 						<div class="thumb-item elementor-fit-aspect-ratio" style="background-image:url(<?php echo esc_attr( $image['url'] ); ?>)"></div>
 						</div>
 						<?php

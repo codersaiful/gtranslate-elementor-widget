@@ -242,3 +242,7 @@ body .lang-list a{
 .horizontal-wrap{
   position: relative;
 }
+.gallery-thumbs .swiper-slide {
+  height: auto !important;
+  margin-bottom: 15px !important;
+}
